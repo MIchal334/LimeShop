@@ -13,7 +13,7 @@ public class ClientEntity {
     @Column(name = "user_id")
     Long userId;
 
-    
+
     public ClientEntity() {
     }
 
