@@ -14,4 +14,9 @@ public class ClientPreducentRelation {
 
     @Column(name = "client_id")
     Long clientId;
+
+    public ClientPreducentRelation() {
+    }
+
+    
 }

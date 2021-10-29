@@ -12,5 +12,17 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
       database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
+server:
+  port: 8081
+
+
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  resource: Lime-Shop-app
+  realm: Lime-Shop
+  credentials:
+    secret: b7525549-e6d5-4069-b9d1-95ee7595caa5
+  cors: true
+  enabled: true
 
 

@@ -1,7 +1,5 @@
-Dodać do bazki:
-
-- Cena wapna za kg 
-
-- ilość wpana w zamówaniu (mimimun 500Kg razy x)  
+	-Zmpować odpowiedzi tokena na Jsona
+	- Zrobić exception handler dodać WronGPasswordException
+	- Sprawdzić czemu nie chroni pustego endpointa
 
   
