@@ -1,5 +1,5 @@
-	-Zmpować odpowiedzi tokena na Jsona
-	- Zrobić exception handler dodać WronGPasswordException
-	- Sprawdzić czemu nie chroni pustego endpointa
+	-Dodać dodwanie lan i long
+
+	- Zająć się walidacją danych przy rejstracji
 
   
