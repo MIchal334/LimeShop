@@ -25,6 +25,13 @@ public class OrderEntity {
     @Column(name = "date_of_receipt")
     LocalDateTime dateOfReceipt;
 
+    @Column(name = "is_check")
+    Boolean isCheck;
+
+
+    @Column(name = "is_accept")
+    Boolean isAccept;
+
     public OrderEntity() {
     }
 
@@ -50,5 +57,13 @@ public class OrderEntity {
 
     public LocalDateTime getDateOfReceipt() {
         return dateOfReceipt;
+    }
+
+    public Boolean getCheck() {
+        return isCheck;
+    }
+
+    public Boolean getAccept() {
+        return isAccept;
     }
 }
