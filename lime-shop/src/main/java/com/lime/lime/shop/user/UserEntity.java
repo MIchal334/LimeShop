@@ -3,8 +3,8 @@ package com.lime.lime.shop.user;
 import com.lime.lime.shop.address.AddressEntity;
 import com.lime.lime.shop.lime.LimeEntity;
 import com.lime.lime.shop.order.OrderEntity;
-import com.lime.lime.shop.user.dictionaryTable.ClientPreducentRelation;
-import com.lime.lime.shop.user.dictionaryTable.RoleEntity;
+import com.lime.lime.shop.dictionaryTable.ClientPreducentRelation;
+import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -62,8 +62,19 @@ public class UserEntity {
     private Set<ClientPreducentRelation> myClient;
 
 
-
     public UserEntity() {
+    }
+
+    public UserEntity(UserDTO newUser, AddressEntity address, RoleEntity role) {
+        this.username = newUser.getUsername();
+        this.name = newUser.getName();
+        this.lastName = newUser.getLastName();
+        this.email = newUser.getEmail();
+        this.phoneNumber = newUser.getPhoneNumber();
+        this.address = address;
+        this.role=role;
+        this.isDeleted = false;
+
     }
 
     public Long getId() {

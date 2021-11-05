@@ -1,4 +1,4 @@
-package com.lime.lime.shop.user.dictionaryTable;
+package com.lime.lime.shop.dictionaryTable.role;
 
 import com.lime.lime.shop.user.UserEntity;
 

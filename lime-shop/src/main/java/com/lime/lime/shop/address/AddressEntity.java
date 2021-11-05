@@ -1,5 +1,6 @@
 package com.lime.lime.shop.address;
 
+import com.lime.lime.shop.user.UserDTO;
 import com.lime.lime.shop.user.UserEntity;
 
 import javax.persistence.*;
@@ -30,6 +31,15 @@ public class AddressEntity {
     private UserEntity user;
 
     public AddressEntity() {
+    }
+
+    public AddressEntity(UserDTO newUser) {
+        this.city = newUser.getCity();
+        this.street = newUser.getStreet();
+        this.houseNumber = newUser.getHouseNumber();
+        this.lat = (float)0;
+        this.lon = (float) 0;
+
     }
 
     public Long getId() {
