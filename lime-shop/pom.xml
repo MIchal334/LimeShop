@@ -80,6 +80,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>6.4.4</version>
+
+				<configuration>
+					<user>root</user>
+					<password>root</password>
+					<url>jdbc:mysql://localhost:3306/lime?serverTimezone=Europe/Budapest</url>
+					<schemas>
+						<schema>lime</schema>
+					</schemas>
+				</configuration>
+
+			</plugin>
 		</plugins>
 	</build>
 

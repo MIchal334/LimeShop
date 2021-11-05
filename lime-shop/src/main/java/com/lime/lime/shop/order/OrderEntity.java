@@ -1,5 +1,8 @@
 package com.lime.lime.shop.order;
 
+import com.lime.lime.shop.lime.LimeEntity;
+import com.lime.lime.shop.user.UserEntity;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,14 +13,18 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "producent_id")
-    Long producentId;
+    @ManyToOne
+    @JoinColumn(name = "producent_id")
+    UserEntity producer;
 
-    @Column(name = "client_id")
-    Long clientId;
 
-    @Column(name = "lime_id")
-    Long limeId;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    UserEntity client;
+
+    @ManyToOne
+    @JoinColumn(name = "lime_id")
+    LimeEntity lime;
 
     @Column(name = "amount")
     Long amount;
@@ -39,16 +46,16 @@ public class OrderEntity {
         return id;
     }
 
-    public Long getProducentId() {
-        return producentId;
+    public UserEntity getProducer() {
+        return producer;
     }
 
-    public Long getClientId() {
-        return clientId;
+    public UserEntity getClient() {
+        return client;
     }
 
-    public Long getLimeId() {
-        return limeId;
+    public LimeEntity getLime() {
+        return lime;
     }
 
     public Long getAmount() {

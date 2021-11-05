@@ -1,6 +1,10 @@
 package com.lime.lime.shop.lime;
 
+import com.lime.lime.shop.order.OrderEntity;
+import com.lime.lime.shop.user.UserEntity;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "lime")
@@ -15,8 +19,12 @@ public class LimeEntity {
     @Column(name = "amount")
     Integer amount;
 
-    @Column(name = "owner_id")
-    Long owner_id;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    UserEntity owner;
+
+    @OneToMany(mappedBy = "lime", cascade = CascadeType.ALL)
+    Set<OrderEntity> ordersWithLime;
 
     public LimeEntity() {
     }
@@ -33,7 +41,7 @@ public class LimeEntity {
         return amount;
     }
 
-    public Long getOwner_id() {
-        return owner_id;
+    public UserEntity getOwner() {
+        return owner;
     }
 }

@@ -1,5 +1,7 @@
 package com.lime.lime.shop.address;
 
+import com.lime.lime.shop.user.UserEntity;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,15 @@ public class AddressEntity {
     @Column(name = "house_number")
     String houseNumber;
 
+    @Column(name = "lon")
+    Float lon;
+
+    @Column(name = "lat")
+    Float lat;
+
+    @OneToOne(mappedBy = "address")
+    private UserEntity user;
+
     public AddressEntity() {
     }
 
@@ -35,5 +46,17 @@ public class AddressEntity {
 
     public String getHouseNumber() {
         return houseNumber;
+    }
+
+    public Float getLon() {
+        return lon;
+    }
+
+    public Float getLat() {
+        return lat;
+    }
+
+    public UserEntity getUser() {
+        return user;
     }
 }

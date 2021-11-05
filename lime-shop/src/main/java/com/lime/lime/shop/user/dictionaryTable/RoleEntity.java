@@ -1,9 +1,9 @@
 package com.lime.lime.shop.user.dictionaryTable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.lime.lime.shop.user.UserEntity;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -13,6 +13,9 @@ public class RoleEntity {
 
     @Column(name = "role_name")
     String roleName;
+
+    @OneToMany(mappedBy = "role")
+    Set<UserEntity> userEntitySet;
 
     public RoleEntity() {
     }

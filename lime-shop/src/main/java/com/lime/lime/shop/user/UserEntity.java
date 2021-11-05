@@ -1,6 +1,13 @@
 package com.lime.lime.shop.user;
 
+import com.lime.lime.shop.address.AddressEntity;
+import com.lime.lime.shop.lime.LimeEntity;
+import com.lime.lime.shop.order.OrderEntity;
+import com.lime.lime.shop.user.dictionaryTable.ClientPreducentRelation;
+import com.lime.lime.shop.user.dictionaryTable.RoleEntity;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -25,14 +32,36 @@ public class UserEntity {
     @Column(name = "email")
     String email;
 
-    @Column(name = "address")
-    Long address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address", referencedColumnName = "id")
+    AddressEntity address;
 
-    @Column(name = "role")
-    Short role;
+    @ManyToOne
+    @JoinColumn(name = "role")
+    RoleEntity role;
 
     @Column(name = "isDeleted")
     Boolean isDeleted;
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    Set<LimeEntity> limes;
+
+    @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
+    Set<OrderEntity> producerOrders;
+
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    Set<OrderEntity> clientOrders;
+
+
+    @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
+    Set<ClientPreducentRelation> myDealer;
+
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    Set<ClientPreducentRelation> myClient;
+
+
 
     public UserEntity() {
     }
@@ -61,12 +90,16 @@ public class UserEntity {
         return email;
     }
 
-    public Long getAddress() {
+    public AddressEntity getAddress() {
         return address;
     }
 
-    public Short getRole() {
+    public RoleEntity getRole() {
         return role;
+    }
+
+    public Set<LimeEntity> getLimes() {
+        return limes;
     }
 
     public Boolean getDeleted() {

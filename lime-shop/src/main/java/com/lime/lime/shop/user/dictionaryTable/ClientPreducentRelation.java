@@ -1,5 +1,7 @@
 package com.lime.lime.shop.user.dictionaryTable;
 
+import com.lime.lime.shop.user.UserEntity;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,14 +11,22 @@ public class ClientPreducentRelation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "producnet_id")
-    Long producnetId;
+    @ManyToOne
+    @JoinColumn(name = "producnet_id")
+    UserEntity producer;
 
-    @Column(name = "client_id")
-    Long clientId;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    UserEntity client;
 
     public ClientPreducentRelation() {
     }
 
-    
+    public UserEntity getProducer() {
+        return producer;
+    }
+
+    public UserEntity getClient() {
+        return client;
+    }
 }
