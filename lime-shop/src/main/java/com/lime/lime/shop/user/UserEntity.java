@@ -15,51 +15,51 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "username")
-    String username;
+    private String username;
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @Column(name = "last_name")
-    String lastName;
+    private String lastName;
 
     @Column(name = "phone_number")
-    String phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "email")
-    String email;
+    private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address", referencedColumnName = "id")
-    AddressEntity address;
+    private AddressEntity address;
 
     @ManyToOne
     @JoinColumn(name = "role")
-    RoleEntity role;
+    private RoleEntity role;
 
     @Column(name = "isDeleted")
-    Boolean isDeleted;
+    private Boolean isDeleted;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    Set<LimeEntity> limes;
+    private Set<LimeEntity> limes;
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
-    Set<OrderEntity> producerOrders;
+    private Set<OrderEntity> producerOrders;
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    Set<OrderEntity> clientOrders;
+    private Set<OrderEntity> clientOrders;
 
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
-    Set<ClientPreducentRelation> myDealer;
+    private Set<ClientPreducentRelation> myDealer;
 
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    Set<ClientPreducentRelation> myClient;
+    private Set<ClientPreducentRelation> myClient;
 
 
 

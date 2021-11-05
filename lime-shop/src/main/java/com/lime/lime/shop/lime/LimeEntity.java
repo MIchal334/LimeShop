@@ -11,20 +11,20 @@ import java.util.Set;
 public class LimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "type")
-    String type;
+    private String type;
 
     @Column(name = "amount")
-    Integer amount;
+    private Integer amount;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    UserEntity owner;
+    private UserEntity owner;
 
     @OneToMany(mappedBy = "lime", cascade = CascadeType.ALL)
-    Set<OrderEntity> ordersWithLime;
+    private Set<OrderEntity> ordersWithLime;
 
     public LimeEntity() {
     }

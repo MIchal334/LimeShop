@@ -12,19 +12,17 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class SecurityController {
 
-    private  final SecurityService securityService;
+    private final SecurityService securityService;
 
     public SecurityController(SecurityService securityService) {
         this.securityService = securityService;
     }
 
     @GetMapping
-    ResponseEntity<JSONObject> getToken(@RequestBody MultiValueMap<String,String> body) throws JSONException {
-        JSONObject json = new JSONObject();
-        Map<String,String> token = securityService.getToken(body);
-        json.put("token", token.get("token"));
-        json.put("token", token.get("refreshToken"));
-        return ResponseEntity.ok(json);
+    ResponseEntity<TokenModel> getToken(@RequestBody MultiValueMap<String, String> body) throws JSONException {
+
+        TokenModel token = securityService.getToken(body);
+        return ResponseEntity.ok(token);
     }
 
 

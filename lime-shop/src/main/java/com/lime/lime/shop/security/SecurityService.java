@@ -25,13 +25,13 @@ public class SecurityService {
     private final String grant_type = "password";
 
 
-    public Map<String, String> getToken(MultiValueMap body) {
+    public TokenModel getToken(MultiValueMap body) {
 
         Map<String, String> mapWithToken = new HashMap<>();
-        String response = null;
-        String url = "http://localhost:8080/auth/realms/"+realmName+"/protocol/openid-connect/token";
-        body.add("client_id",clientId );
-        body.add("client_secret", client_secret );
+        TokenModel response = new TokenModel();
+        String url = "http://localhost:8080/auth/realms/" + realmName + "/protocol/openid-connect/token";
+        body.add("client_id", clientId);
+        body.add("client_secret", client_secret);
         body.add("grant_type", grant_type);
         RestTemplate restTemplate = new RestTemplate();
 
@@ -39,14 +39,13 @@ public class SecurityService {
             response =
                     restTemplate.postForObject(url,
                             body,
-                            String.class);
+                            TokenModel.class);
         } catch (HttpClientErrorException e) {
-            response = e.getMessage();
+
+            throw new IllegalStateException("Password is wrong");
+
         }
 
-        if (response.contains("Unauthorized")) {
-            throw new IllegalStateException("Password is wrong");
-        }
-        return mapWithToken;
+        return response;
     }
 }

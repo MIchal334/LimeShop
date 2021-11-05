@@ -11,33 +11,33 @@ import java.time.LocalDateTime;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "producent_id")
-    UserEntity producer;
+    private UserEntity producer;
 
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    UserEntity client;
+    private UserEntity client;
 
     @ManyToOne
     @JoinColumn(name = "lime_id")
-    LimeEntity lime;
+    private LimeEntity lime;
 
     @Column(name = "amount")
-    Long amount;
+    private Long amount;
 
     @Column(name = "date_of_receipt")
-    LocalDateTime dateOfReceipt;
+    private LocalDateTime dateOfReceipt;
 
     @Column(name = "is_check")
-    Boolean isCheck;
+    private Boolean isCheck;
 
 
     @Column(name = "is_accept")
-    Boolean isAccept;
+    private Boolean isAccept;
 
     public OrderEntity() {
     }

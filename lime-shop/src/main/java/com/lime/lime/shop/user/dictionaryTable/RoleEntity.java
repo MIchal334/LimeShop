@@ -9,13 +9,13 @@ import java.util.Set;
 @Table(name = "roles")
 public class RoleEntity {
     @Id
-    Short id;
+    private Short id;
 
     @Column(name = "role_name")
-    String roleName;
+    private String roleName;
 
     @OneToMany(mappedBy = "role")
-    Set<UserEntity> userEntitySet;
+    private Set<UserEntity> userEntitySet;
 
     public RoleEntity() {
     }

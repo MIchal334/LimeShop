@@ -9,22 +9,22 @@ import javax.persistence.*;
 public class AddressEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @Column(name = "city")
-    String city;
+    private String city;
 
     @Column(name = "street")
-    String street;
+    private String street;
 
     @Column(name = "house_number")
-    String houseNumber;
+    private String houseNumber;
 
     @Column(name = "lon")
-    Float lon;
+    private Float lon;
 
     @Column(name = "lat")
-    Float lat;
+    private Float lat;
 
     @OneToOne(mappedBy = "address")
     private UserEntity user;

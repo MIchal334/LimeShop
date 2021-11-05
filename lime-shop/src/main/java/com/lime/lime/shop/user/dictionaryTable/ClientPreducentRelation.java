@@ -9,15 +9,15 @@ import javax.persistence.*;
 public class ClientPreducentRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "producnet_id")
-    UserEntity producer;
+    private UserEntity producer;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    UserEntity client;
+    private UserEntity client;
 
     public ClientPreducentRelation() {
     }
