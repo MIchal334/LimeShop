@@ -1,5 +1,6 @@
 package com.lime.lime.shop.address;
 
+import com.lime.lime.shop.address.modelForRestClient.Position;
 import com.lime.lime.shop.user.UserDTO;
 import com.lime.lime.shop.user.UserEntity;
 
@@ -27,18 +28,21 @@ public class AddressEntity {
     @Column(name = "lat")
     private Float lat;
 
+    @Column(name = "post_code")
+    private String postCode;
+
     @OneToOne(mappedBy = "address")
     private UserEntity user;
 
     public AddressEntity() {
     }
 
-    public AddressEntity(UserDTO newUser) {
+    public AddressEntity(UserDTO newUser, Position position) {
         this.city = newUser.getCity();
         this.street = newUser.getStreet();
         this.houseNumber = newUser.getHouseNumber();
-        this.lat = (float)0;
-        this.lon = (float) 0;
+        this.lat = position.getLat();
+        this.lon = position.getLng();
 
     }
 

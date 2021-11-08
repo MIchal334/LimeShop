@@ -1,5 +1,9 @@
-	-Dodać dodwanie lan i long
 
 	- Zająć się walidacją danych przy rejstracji
+	- Zajać się implemnatacją pozostałych endpointów dla userów
+
+	
+
+	
 
   

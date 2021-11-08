@@ -20,6 +20,8 @@ public class UserDTO {
 
     private String houseNumber;
 
+    private String postCode;
+
     private String roleName;
 
 
@@ -101,5 +103,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
     }
 }

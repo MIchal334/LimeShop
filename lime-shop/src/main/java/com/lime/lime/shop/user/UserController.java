@@ -26,10 +26,4 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @GetMapping("/")
-    public  String tets(){
-        addressService.getLatAndLon("Cieśle","-","1a","98-335");
-        return "tets";
-    }
-
 }

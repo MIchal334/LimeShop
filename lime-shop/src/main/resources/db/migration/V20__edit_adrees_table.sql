@@ -1,0 +1,1 @@
+alter table addresses add column post_code varchar(8);
