@@ -19,6 +19,9 @@ public class ClientPreducentRelation {
     @JoinColumn(name = "client_id")
     private UserEntity client;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     public ClientPreducentRelation() {
     }
 

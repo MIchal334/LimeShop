@@ -113,7 +113,7 @@ public class UserEntity {
         return limes;
     }
 
-    public Boolean getDeleted() {
+    public Boolean isDeleted() {
         return isDeleted;
     }
 
@@ -139,5 +139,9 @@ public class UserEntity {
 
     public void setAddress(AddressEntity address) {
         this.address = address;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

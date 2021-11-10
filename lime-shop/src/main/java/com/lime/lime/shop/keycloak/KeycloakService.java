@@ -78,6 +78,14 @@ public class KeycloakService {
         userResource.update(userToUpdate);
     }
 
+    public void setDisabled(String userName) {
+        String userId = findUserIdByUserName(userName);
+        UserResource userResource = getUserResource(userId);
+        UserRepresentation userToUpdate = userResource.toRepresentation();
+        userToUpdate.setEnabled(false);
+        userResource.update(userToUpdate);
+    }
+
     private List<RoleRepresentation> preparingRoleRepresentationForUser(UserDTO user) {
         List<RoleRepresentation> role = new ArrayList<>();
 

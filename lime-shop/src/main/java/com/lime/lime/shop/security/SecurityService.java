@@ -42,7 +42,7 @@ public class SecurityService {
                             TokenModel.class);
         } catch (HttpClientErrorException e) {
 
-            throw new IllegalStateException("Password is wrong");
+            throw new IllegalStateException("Password is wrong or User is deleted");
 
         }
 

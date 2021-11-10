@@ -31,6 +31,9 @@ public class AddressEntity {
     @Column(name = "post_code")
     private String postCode;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     @OneToOne(mappedBy = "address")
     private UserEntity user;
 
@@ -44,6 +47,7 @@ public class AddressEntity {
         this.lat = position.getLat();
         this.lon = position.getLng();
         this.postCode = newUser.getPostCode();
+        this.isDeleted = false;
 
     }
 
@@ -102,5 +106,9 @@ public class AddressEntity {
 
     public void setPostCode(String postCode) {
         this.postCode = postCode;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
     }
 }

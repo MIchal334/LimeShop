@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -68,8 +69,18 @@ public class UserService {
 
     }
 
+    @Transactional
+    public void deleteUser() {
+        UserEntity currentUser = handleCurrentUser();
+        addressService.deleteAddressByUserId(currentUser.getId());
+        keycloakService.setDisabled(currentUser.getUsername());
+        currentUser.setDeleted(true);
+    }
+
     private UserEntity findUserByUserName(String username) {
-        return userRepository.getUserByUsername(username).orElseThrow(() -> new IllegalStateException("User not exist"));
+        return userRepository.getUserByUsername(username)
+                .filter(user -> !user.isDeleted())
+                .orElseThrow(() -> new IllegalStateException("User not exist or is deleted"));
     }
 
     private UserEntity prepareUserToCreate(UserDTO newUser) {
@@ -95,4 +106,6 @@ public class UserService {
         currentUser.setAddress(address);
         return currentUser;
     }
+
+
 }

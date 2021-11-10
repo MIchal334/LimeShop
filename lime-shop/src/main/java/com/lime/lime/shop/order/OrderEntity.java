@@ -39,6 +39,9 @@ public class OrderEntity {
     @Column(name = "is_accept")
     private Boolean isAccept;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     public OrderEntity() {
     }
 

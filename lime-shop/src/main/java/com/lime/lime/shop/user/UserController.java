@@ -28,6 +28,12 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+    @DeleteMapping("/profile")
+    public ResponseEntity<?> deleteProfile(){
+        userService.deleteUser();
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserEntity> addNewUser(@RequestBody UserDTO newUser ){
         UserEntity result = userService.creteNewAccount(newUser);

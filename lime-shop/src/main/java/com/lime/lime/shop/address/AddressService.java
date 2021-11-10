@@ -11,22 +11,35 @@ import java.util.Arrays;
 
 @Service
 public class AddressService {
+
     private final String apiKye = "LwZyHS5f7VqBTxUVOdZwFmIMFI4wT-vNR1_1kBS-1KI";
+    private final AddressRepository addressRepository;
 
-    public Position getLatAndLon(UserDTO userData){
-        RestTemplate restClient  = new RestTemplate();
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
+
+    public void deleteAddressByUserId(Long id) {
+        AddressEntity addressToDelete = addressRepository.getAddressByUserId(id);
+        addressToDelete.setDeleted(true);
+    }
+
+
+    public Position getLatAndLon(UserDTO userData) {
+        RestTemplate restClient = new RestTemplate();
         ResponseModel response = new ResponseModel();
-        if(userData.getStreet().equals("-")){
-         userData.setStreet("");
+        if (userData.getStreet().equals("-")) {
+            userData.setStreet("");
         }
-        String address = userData.getHouseNumber() + " " + userData.getStreet() + "," + userData.getCity()+","+userData.getPostCode();
-        String url = "https://geocode.search.hereapi.com/v1/geocode?apiKey="+apiKye+"&q="+address;
+        String address = userData.getHouseNumber() + " " + userData.getStreet() + "," + userData.getCity() + "," + userData.getPostCode();
+        String url = "https://geocode.search.hereapi.com/v1/geocode?apiKey=" + apiKye + "&q=" + address;
 
-        response = restClient.getForObject(url,ResponseModel.class);
+        response = restClient.getForObject(url, ResponseModel.class);
 
         Items items = Arrays.stream(response.getItems()).findFirst().orElseThrow(() -> new IllegalStateException("Address not found"));
 
         return items.getPosition();
     }
+
 
 }

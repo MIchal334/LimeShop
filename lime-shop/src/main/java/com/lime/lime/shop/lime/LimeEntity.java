@@ -19,6 +19,9 @@ public class LimeEntity {
     @Column(name = "amount")
     private Integer amount;
 
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
