@@ -78,4 +78,29 @@ public class AddressEntity {
     public String getPostCode() {
         return postCode;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setPosition( Position position){
+        this.lon = position.getLng();
+        this.lat = position.getLat();
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
 }

@@ -22,6 +22,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PutMapping("/profile")
+    public ResponseEntity<UserDTO> editProfile(@RequestBody UserDTO newUserData){
+        UserDTO result = new UserDTO(userService.editProfile(newUserData));
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<UserEntity> addNewUser(@RequestBody UserDTO newUser ){
         UserEntity result = userService.creteNewAccount(newUser);

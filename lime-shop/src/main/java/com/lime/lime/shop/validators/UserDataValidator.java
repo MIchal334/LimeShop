@@ -22,51 +22,70 @@ public class UserDataValidator {
         this.roleRepository = roleRepository;
     }
 
-    public void validData(UserDTO newUser) {
-        userNameValidation(newUser.getUsername());
-        phoneNumberValidator(newUser.getPhoneNumber());
-        emailFormatValidation(newUser.getEmail());
+    public void validData(UserDTO newUser,Optional<UserEntity> currentUser ) {
+        Optional<UserEntity> previousUser = Optional.empty();
+        if(currentUser.isPresent()){
+         previousUser = currentUser;
+         newUser.setRoleName(currentUser.get().getRole().getRoleName());
+        }
+
+        userNameValidation(newUser.getUsername(),previousUser);
+        phoneNumberValidator(newUser.getPhoneNumber(),previousUser);
+        emailFormatValidation(newUser.getEmail(),previousUser);
         roleValidator(newUser.getRoleName());
-    }
-
-    private void userNameValidation(String username) {
-        Optional<UserEntity> user = userRepository.getUserByUsername(username);
-
-        if (user.isPresent()) {
-            throw new ResourceAlreadyExistsException("User with this username exist");
-        }
-    }
-
-    private void phoneNumberValidator(String number) {
-
-        Optional<UserEntity> user = userRepository.getUserByPhoneNumber(number);
-        int size = number.toCharArray().length;
-
-        if (user.isPresent()) {
-            throw new ResourceAlreadyExistsException("User with this phone number exist");
-        }
-
-        if (size != 9) {
-            throw new WrongFormatException("The phone number has wrong format");
-        }
-
 
     }
 
-    private void emailFormatValidation(String email) {
-        Optional<UserEntity> user = userRepository.getUserByEmail(email);
-        int indexAt = email.indexOf('@');
+    private void userNameValidation(String username, Optional<UserEntity> previousUser) {
 
-        if (user.isPresent()) {
-            throw new ResourceAlreadyExistsException("User with this email exist");
+        if(!previousUser.isPresent() || (previousUser.isPresent() && !previousUser.get().getUsername().equals(username)) ) {
+
+            Optional<UserEntity> user = userRepository.getUserByUsername(username);
+
+            if (user.isPresent()) {
+                throw new ResourceAlreadyExistsException("User with this username exist");
+            }
+        }
+    }
+
+    private void phoneNumberValidator(String number, Optional<UserEntity> previousUser) {
+
+        if(!previousUser.isPresent() || (previousUser.isPresent() && !previousUser.get().getPhoneNumber().equals(number)) ){
+            Optional<UserEntity> user = userRepository.getUserByPhoneNumber(number);
+            int size = number.toCharArray().length;
+
+            if (user.isPresent()) {
+                throw new ResourceAlreadyExistsException("User with this phone number exist");
+            }
+
+            if (size != 9) {
+                throw new WrongFormatException("The phone number has wrong format");
+            }
         }
 
-        if (indexAt <= 0){
-            throw new WrongFormatException("The email has wrong format");
+
+
+
+    }
+
+    private void emailFormatValidation(String email, Optional<UserEntity> previousUser) {
+        if(!previousUser.isPresent() || (previousUser.isPresent() && !previousUser.get().getEmail().equals(email)) ){
+            Optional<UserEntity> user = userRepository.getUserByEmail(email);
+            int indexAt = email.indexOf('@');
+
+            if (user.isPresent()) {
+                throw new ResourceAlreadyExistsException("User with this email exist");
+            }
+
+            if (indexAt <= 0){
+                throw new WrongFormatException("The email has wrong format");
+            }
         }
+
     }
 
     private void roleValidator(String roleName){
+
         List<String> roleList = roleRepository.findRoleNameWithoutAdmin();
         if(!roleList.contains(roleName)){
             throw new IllegalArgumentException("This role is not available");

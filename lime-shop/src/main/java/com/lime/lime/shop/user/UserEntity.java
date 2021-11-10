@@ -116,4 +116,28 @@ public class UserEntity {
     public Boolean getDeleted() {
         return isDeleted;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
+    }
 }

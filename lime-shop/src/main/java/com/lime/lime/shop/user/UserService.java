@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -39,16 +41,12 @@ public class UserService {
     }
 
 
-
     public UserEntity creteNewAccount(UserDTO newUser) {
 
         newUser.setRoleName(newUser.getRoleName().toUpperCase());
-        userDataValidator.validData(newUser);
+        userDataValidator.validData(newUser, Optional.empty());
 
-        Position position = addressService.getLatAndLon(newUser);
-        RoleEntity role = roleService.getRoleByName(newUser.getRoleName());
-        AddressEntity address = new AddressEntity(newUser, position);
-        UserEntity userToAdd = new UserEntity(newUser, address, role);
+        UserEntity userToAdd = prepareUserToCreate(newUser);
 
         keycloakService.creteNewUser(newUser);
         keycloakService.addRoleToUser(newUser);
@@ -56,7 +54,40 @@ public class UserService {
         return userToAdd;
     }
 
+
+    public UserEntity editProfile(UserDTO newUserData) {
+        UserEntity currentUser = handleCurrentUser();
+        userDataValidator.validData(newUserData, Optional.of(currentUser));
+        UserEntity userToUpdate = prepareUserToUpdate(currentUser, newUserData);
+        return userRepository.save(userToUpdate);
+
+    }
+
     private UserEntity findUserByUserName(String username) {
         return userRepository.getUserByUsername(username).orElseThrow(() -> new IllegalStateException("User not exist"));
+    }
+
+    private UserEntity prepareUserToCreate(UserDTO newUser) {
+        Position position = addressService.getLatAndLon(newUser);
+        RoleEntity role = roleService.getRoleByName(newUser.getRoleName());
+        AddressEntity address = new AddressEntity(newUser, position);
+        UserEntity userToAdd = new UserEntity(newUser, address, role);
+        return userToAdd;
+    }
+
+    private UserEntity prepareUserToUpdate(UserEntity currentUser, UserDTO newData) {
+        AddressEntity address = currentUser.getAddress();
+        Position position = addressService.getLatAndLon(newData);
+        address.setPosition(position);
+        address.setCity(newData.getCity());
+        address.setStreet(newData.getStreet());
+        address.setHouseNumber(newData.getHouseNumber());
+        currentUser.setName(newData.getName());
+        currentUser.setUsername(newData.getUsername());
+        currentUser.setLastName(newData.getLastName());
+        currentUser.setPhoneNumber(newData.getPhoneNumber());
+        currentUser.setEmail(newData.getEmail());
+        currentUser.setAddress(address);
+        return currentUser;
     }
 }
