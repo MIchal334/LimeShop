@@ -50,16 +50,21 @@ public class UserService {
 
         keycloakService.creteNewUser(newUser);
         keycloakService.addRoleToUser(newUser);
-        userRepository.save(userToAdd);
-        return userToAdd;
+        UserEntity result = userRepository.save(userToAdd);
+        return result;
     }
 
 
     public UserEntity editProfile(UserDTO newUserData) {
         UserEntity currentUser = handleCurrentUser();
+        String oldUsername = handleCurrentUser().getUsername();
         userDataValidator.validData(newUserData, Optional.of(currentUser));
         UserEntity userToUpdate = prepareUserToUpdate(currentUser, newUserData);
-        return userRepository.save(userToUpdate);
+
+        keycloakService.updateUser(newUserData,oldUsername);
+        keycloakService.addRoleToUser(newUserData);
+        UserEntity result = userRepository.save(userToUpdate);
+        return result;
 
     }
 

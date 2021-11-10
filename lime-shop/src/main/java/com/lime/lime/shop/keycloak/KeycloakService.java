@@ -1,5 +1,6 @@
 package com.lime.lime.shop.keycloak;
 
+import com.lime.lime.shop.dictionaryTable.role.RoleService;
 import com.lime.lime.shop.user.UserDTO;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
@@ -8,13 +9,18 @@ import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Component
 public class KeycloakService {
+
+    private final RoleService roleService;
+
+    public KeycloakService(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     public void creteNewUser(UserDTO userData){
         UserRepresentation newUser = new UserRepresentation();
@@ -55,6 +61,21 @@ public class KeycloakService {
                 .get(id)
                 .toRepresentation()
                 .getUsername();
+    }
+
+
+    public void updateUser(UserDTO updateUser, String username) {
+        String userId = findUserIdByUserName(username);
+        UserResource userResource = getUserResource(userId);
+
+        UserRepresentation userToUpdate = userResource.toRepresentation();
+
+        userToUpdate.setUsername(updateUser.getUsername());
+        userToUpdate.setEmail(updateUser.getEmail());
+        userToUpdate.getRealmRoles();
+
+        userResource.roles().realmLevel().remove(roleService.getAllRoleToRoleRepresentation());
+        userResource.update(userToUpdate);
     }
 
     private List<RoleRepresentation> preparingRoleRepresentationForUser(UserDTO user) {
