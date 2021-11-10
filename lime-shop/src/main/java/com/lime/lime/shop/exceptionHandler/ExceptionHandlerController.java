@@ -1,9 +1,14 @@
 package com.lime.lime.shop.exceptionHandler;
 
+import com.lime.lime.shop.exceptionHandler.exception.ResourceAlreadyExistsException;
+import com.lime.lime.shop.exceptionHandler.exception.WrongFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.ws.rs.ForbiddenException;
+import javax.ws.rs.NotAuthorizedException;
 
 @RestControllerAdvice
 public class ExceptionHandlerController {
@@ -18,4 +23,23 @@ public class ExceptionHandlerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    ResponseEntity<Object> handlerForbiddenException(ForbiddenException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler(NotAuthorizedException.class)
+    ResponseEntity<Object> handlerNotAuthorizedException(NotAuthorizedException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("NotAuthorizedException");
+    }
+
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    ResponseEntity<Object> handlerItemExistException(ResourceAlreadyExistsException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler(WrongFormatException.class)
+    ResponseEntity<Object> handlerWrongFormatException(WrongFormatException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }

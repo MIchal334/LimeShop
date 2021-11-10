@@ -11,4 +11,10 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity,Long>{
     @Query("select distinct u from UserEntity u where u.username = :username")
     Optional<UserEntity> getUserByUsername(@Param("username") String username);
+
+    @Query("select  distinct  u from  UserEntity u where u.phoneNumber = :number")
+    Optional<UserEntity> getUserByPhoneNumber(@Param("number") String number);
+
+    @Query("select  distinct  u from  UserEntity u where u.email = :email")
+    Optional<UserEntity> getUserByEmail(@Param("email") String email);
 }

@@ -1,4 +1,4 @@
-
+	- Dodać własne klasy wyjątków 
 	- Zająć się walidacją danych przy rejstracji
 	- Zajać się implemnatacją pozostałych endpointów dla userów
 

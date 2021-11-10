@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -12,5 +13,8 @@ public interface RoleRepository extends JpaRepository<RoleEntity,Short>{
 
     @Query("from RoleEntity r where r.roleName = :roleName")
     Optional<RoleEntity> findRoleByName(@Param("roleName") String roleName);
+
+    @Query("SELECT r.roleName from RoleEntity r  where r.roleName <> 'admin' " )
+    List<String> findRoleNameWithoutAdmin();
 
 }

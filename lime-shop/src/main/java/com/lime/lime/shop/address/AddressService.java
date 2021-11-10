@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 @Service
 public class AddressService {
-    private final String apiKye = "r3BeIqGW9fRhVQbhPPuv8MWVISYOD47OBtOLZf3hKuE";
+    private final String apiKye = "9QVzxwES8VVmrEtlTGMNqY1Zu7sVre_iuJZRFEzQKug";
 
     public Position getLatAndLon(UserDTO userData){
         RestTemplate restClient  = new RestTemplate();
@@ -24,7 +24,7 @@ public class AddressService {
 
         response = restClient.getForObject(url,ResponseModel.class);
 
-        Items items = Arrays.stream(response.getItems()).findFirst().orElseThrow(() -> new IllegalStateException("This addrees mot exist"));
+        Items items = Arrays.stream(response.getItems()).findFirst().orElseThrow(() -> new IllegalStateException("Address not found"));
 
         return items.getPosition();
     }
