@@ -67,7 +67,6 @@ public class UserDataValidator {
     }
 
     private void roleValidator(String roleName){
-        roleName = roleName.toLowerCase();
         List<String> roleList = roleRepository.findRoleNameWithoutAdmin();
         if(!roleList.contains(roleName)){
             throw new IllegalArgumentException("This role is not available");

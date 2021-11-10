@@ -13,11 +13,10 @@ public class UserController {
 
     private final UserService userService;
 
-    private final AddressService addressService;
 
-    public UserController(UserService userService, AddressService addressService) {
+
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.addressService = addressService;
     }
 
     @PostMapping("/register")

@@ -25,6 +25,7 @@
 				<version>15.0.2</version>
 				<type>pom</type>
 				<scope>import</scope>
+
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -77,6 +78,11 @@
 			<artifactId>android-json</artifactId>
 			<version>0.0.20131108.vaadin1</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-admin-client</artifactId>
+			<version>11.0.3</version>
 		</dependency>
 	</dependencies>
 
