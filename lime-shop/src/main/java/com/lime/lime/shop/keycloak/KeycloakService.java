@@ -86,6 +86,18 @@ public class KeycloakService {
         userResource.update(userToUpdate);
     }
 
+    public void changePassword(String password, String login) {
+
+        String userId = findUserIdByUserName(login);
+        UserResource userResource = getUserResource(userId);
+        UserRepresentation userToUpdate = userResource.toRepresentation();
+        password = password.substring(1,password.length()-1);
+
+        CredentialRepresentation credentialRepresentation = createPasswordCredentials(password.toString());
+        userToUpdate.setCredentials(Collections.singletonList(credentialRepresentation));
+
+        userResource.update(userToUpdate);
+    }
     private List<RoleRepresentation> preparingRoleRepresentationForUser(UserDTO user) {
         List<RoleRepresentation> role = new ArrayList<>();
 

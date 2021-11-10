@@ -27,6 +27,7 @@ public class SecurityService {
 
     public TokenModel getToken(MultiValueMap body) {
 
+        body.remove("newPassword");
         Map<String, String> mapWithToken = new HashMap<>();
         TokenModel response = new TokenModel();
         String url = "http://localhost:8080/auth/realms/" + realmName + "/protocol/openid-connect/token";

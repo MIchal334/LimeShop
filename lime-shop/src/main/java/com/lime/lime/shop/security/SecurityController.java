@@ -19,8 +19,7 @@ public class SecurityController {
     }
 
     @GetMapping
-    ResponseEntity<TokenModel> getToken(@RequestBody MultiValueMap<String, String> body) throws JSONException {
-
+    ResponseEntity<TokenModel> getToken(@RequestBody MultiValueMap<String, String> body)  {
         TokenModel token = securityService.getToken(body);
         return ResponseEntity.ok(token);
     }

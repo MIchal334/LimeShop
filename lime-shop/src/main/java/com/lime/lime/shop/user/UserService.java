@@ -6,10 +6,12 @@ import com.lime.lime.shop.address.modelForRestClient.Position;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
 import com.lime.lime.shop.keycloak.KeycloakService;
+import com.lime.lime.shop.security.SecurityService;
 import com.lime.lime.shop.validators.UserDataValidator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -22,13 +24,15 @@ public class UserService {
     private final AddressService addressService;
     private final UserDataValidator userDataValidator;
     private final KeycloakService keycloakService;
+    private final SecurityService securityService;
 
-    public UserService(RoleService roleService, UserRepository userRepository, AddressService addressService, UserDataValidator userDataValidator, KeycloakService keycloakService) {
+    public UserService(RoleService roleService, UserRepository userRepository, AddressService addressService, UserDataValidator userDataValidator, KeycloakService keycloakService, SecurityService securityService) {
         this.roleService = roleService;
         this.userRepository = userRepository;
         this.addressService = addressService;
         this.userDataValidator = userDataValidator;
         this.keycloakService = keycloakService;
+        this.securityService = securityService;
     }
 
 
@@ -69,6 +73,13 @@ public class UserService {
 
     }
 
+    public void changePassword( MultiValueMap body) {
+        String newPassword = String.valueOf(body.get("newPassword"));
+        body.set("username",handleCurrentUser().getUsername());
+        securityService.getToken(body);
+        keycloakService.changePassword(newPassword,handleCurrentUser().getUsername());
+    }
+
     @Transactional
     public void deleteUser() {
         UserEntity currentUser = handleCurrentUser();
@@ -106,6 +117,7 @@ public class UserService {
         currentUser.setAddress(address);
         return currentUser;
     }
+
 
 
 }
