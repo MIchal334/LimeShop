@@ -43,6 +43,7 @@ public class AddressEntity {
         this.houseNumber = newUser.getHouseNumber();
         this.lat = position.getLat();
         this.lon = position.getLng();
+        this.postCode = newUser.getPostCode();
 
     }
 
@@ -72,5 +73,9 @@ public class AddressEntity {
 
     public UserEntity getUser() {
         return user;
+    }
+
+    public String getPostCode() {
+        return postCode;
     }
 }

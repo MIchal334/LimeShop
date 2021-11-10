@@ -46,6 +46,17 @@ public class KeycloakService {
         usersResourceToAddRole.roles().realmLevel().add(role);
     }
 
+
+    public String findUserNameByUserId(String id) {
+        return KeycloakConfig
+                .getInstance()
+                .realm(KeycloakConfig.realm)
+                .users()
+                .get(id)
+                .toRepresentation()
+                .getUsername();
+    }
+
     private List<RoleRepresentation> preparingRoleRepresentationForUser(UserDTO user) {
         List<RoleRepresentation> role = new ArrayList<>();
 
@@ -60,6 +71,7 @@ public class KeycloakService {
 
         return role;
     }
+
 
     private UserResource getUserResource(String userId) {
         UserResource usersResourceToAddRole = KeycloakConfig

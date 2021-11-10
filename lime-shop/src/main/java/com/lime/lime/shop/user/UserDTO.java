@@ -2,6 +2,8 @@ package com.lime.lime.shop.user;
 
 public class UserDTO {
 
+    private Long id;
+
     private String username;
 
     private String password;
@@ -24,18 +26,36 @@ public class UserDTO {
 
     private String roleName;
 
+    public UserDTO() {
+    }
+
+    public UserDTO(UserEntity user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.name = user.getName();
+        this.lastName = user.getLastName();
+        this.phoneNumber = user.getPhoneNumber();
+        this.email = user.getEmail();
+        this.city = user.getAddress().getCity();
+        this.street = user.getAddress().getStreet();
+        this.houseNumber = user.getAddress().getHouseNumber();
+        this.roleName = user.getRole().getRoleName();
+        this.postCode = user.getAddress().getPostCode();
+    }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -45,33 +65,21 @@ public class UserDTO {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
 
     public String getStreet() {
         return street;
@@ -85,9 +93,6 @@ public class UserDTO {
         return houseNumber;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
 
     public String getRoleName() {
         return roleName;
@@ -101,15 +106,7 @@ public class UserDTO {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPostCode() {
         return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
     }
 }

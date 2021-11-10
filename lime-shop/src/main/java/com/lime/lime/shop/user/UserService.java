@@ -7,6 +7,8 @@ import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
 import com.lime.lime.shop.keycloak.KeycloakService;
 import com.lime.lime.shop.validators.UserDataValidator;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +28,18 @@ public class UserService {
         this.keycloakService = keycloakService;
     }
 
+
+    public UserEntity handleCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String keycloakId = auth.getName();
+        String username = keycloakService.findUserNameByUserId(keycloakId);
+        UserEntity currentUser = findUserByUserName(username);
+        return currentUser;
+    }
+
+
+
     public UserEntity creteNewAccount(UserDTO newUser) {
 
         newUser.setRoleName(newUser.getRoleName().toUpperCase());
@@ -40,5 +54,9 @@ public class UserService {
         keycloakService.addRoleToUser(newUser);
         userRepository.save(userToAdd);
         return userToAdd;
+    }
+
+    private UserEntity findUserByUserName(String username) {
+        return userRepository.getUserByUsername(username).orElseThrow(() -> new IllegalStateException("User not exist"));
     }
 }
