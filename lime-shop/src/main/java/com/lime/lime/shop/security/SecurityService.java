@@ -41,10 +41,17 @@ public class SecurityService {
                     restTemplate.postForObject(url,
                             body,
                             TokenModel.class);
+        } catch (HttpClientErrorException.Unauthorized e) {
+
+            throw new IllegalStateException("Password is wrong ");
+
+        } catch (HttpClientErrorException.BadRequest e) {
+
+            throw new IllegalStateException("User is deleted");
+
         } catch (HttpClientErrorException e) {
 
-            throw new IllegalStateException("Password is wrong or User is deleted");
-
+            throw new IllegalStateException("Error with login");
         }
 
         return response;
