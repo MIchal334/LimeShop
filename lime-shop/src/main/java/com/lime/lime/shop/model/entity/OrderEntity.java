@@ -66,11 +66,15 @@ public class OrderEntity {
         return dateOfReceipt;
     }
 
-    public Boolean getCheck() {
+    public Boolean isCheck() {
         return isCheck;
     }
 
-    public Boolean getAccept() {
+    public Boolean isAccept() {
         return isAccept;
+    }
+
+    public Boolean isDeleted() {
+        return isDeleted;
     }
 }
