@@ -2,9 +2,11 @@ package com.lime.lime.shop.service;
 
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
+import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.LimeRepository;
 import com.lime.lime.shop.repository.OrderRepository;
+import com.lime.lime.shop.validators.LimeDataValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +18,13 @@ public class ProducerService {
     private final OrderRepository orderRepository;
     private final UserService userService;
     private final LimeRepository limeRepository;
+    private final LimeDataValidator limeDataValidator;
 
-    public ProducerService(OrderRepository orderRepository, UserService userService, LimeRepository limeRepository) {
+    public ProducerService(OrderRepository orderRepository, UserService userService, LimeRepository limeRepository, LimeDataValidator limeDataValidator) {
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.limeRepository = limeRepository;
+        this.limeDataValidator = limeDataValidator;
     }
 
     public List<ProducerOrderReadModel> getActuallyOrders() {
@@ -43,5 +47,13 @@ public class ProducerService {
                 .map(LimeDTO::new)
                 .collect(Collectors.toList());
         return listOfLime;
+    }
+
+    public void addNewLime(LimeDTO newLime) {
+        UserEntity user = userService.handleCurrentUser();
+        limeDataValidator.validData(newLime,user);
+        LimeEntity limeToSave = new LimeEntity(newLime,user);
+        limeRepository.save(limeToSave);
+
     }
 }

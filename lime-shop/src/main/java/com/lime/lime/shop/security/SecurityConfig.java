@@ -49,7 +49,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .antMatchers("/auth","/register","/")
                 .permitAll()
                 .antMatchers("/*")
-                .authenticated();
+                .fullyAuthenticated();
         http.csrf().disable();
 
         http.exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());

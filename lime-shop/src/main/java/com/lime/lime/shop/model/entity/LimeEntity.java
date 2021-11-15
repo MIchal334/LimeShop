@@ -1,5 +1,7 @@
 package com.lime.lime.shop.model.entity;
 
+import com.lime.lime.shop.model.dto.LimeDTO;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -27,6 +29,13 @@ public class LimeEntity {
     private Set<OrderEntity> ordersWithLime;
 
     public LimeEntity() {
+    }
+
+    public LimeEntity(LimeDTO newLime, UserEntity user) {
+        this.owner = user;
+        this.type = newLime.getType();
+        this.amount = newLime.getAmount();
+        this.isDeleted = false;
     }
 
     public Long getId() {
