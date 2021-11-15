@@ -1,9 +1,9 @@
 package com.lime.lime.shop.security;
 
+import com.lime.lime.shop.model.entity.TokenModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
-import org.springframework.util.MultiValueMapAdapter;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 

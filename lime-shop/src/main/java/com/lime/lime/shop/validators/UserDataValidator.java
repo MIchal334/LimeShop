@@ -3,9 +3,9 @@ package com.lime.lime.shop.validators;
 import com.lime.lime.shop.dictionaryTable.role.RoleRepository;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceAlreadyExistsException;
 import com.lime.lime.shop.exceptionHandler.exception.WrongFormatException;
-import com.lime.lime.shop.user.UserDTO;
-import com.lime.lime.shop.user.UserEntity;
-import com.lime.lime.shop.user.UserRepository;
+import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.UserEntity;
+import com.lime.lime.shop.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

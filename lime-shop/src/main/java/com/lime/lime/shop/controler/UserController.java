@@ -1,7 +1,9 @@
-package com.lime.lime.shop.user;
+package com.lime.lime.shop.controler;
 
-import com.lime.lime.shop.security.SecurityService;
+import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.UserEntity;
 
+import com.lime.lime.shop.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;

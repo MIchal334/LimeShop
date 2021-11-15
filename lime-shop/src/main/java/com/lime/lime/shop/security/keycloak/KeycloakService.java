@@ -1,7 +1,7 @@
-package com.lime.lime.shop.keycloak;
+package com.lime.lime.shop.security.keycloak;
 
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
-import com.lime.lime.shop.user.UserDTO;
+import com.lime.lime.shop.model.dto.UserDTO;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;

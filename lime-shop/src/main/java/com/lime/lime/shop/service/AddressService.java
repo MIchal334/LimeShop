@@ -1,9 +1,11 @@
-package com.lime.lime.shop.address;
+package com.lime.lime.shop.service;
 
-import com.lime.lime.shop.address.modelForRestClient.Items;
-import com.lime.lime.shop.address.modelForRestClient.Position;
-import com.lime.lime.shop.address.modelForRestClient.ResponseModel;
-import com.lime.lime.shop.user.UserDTO;
+import com.lime.lime.shop.model.modelForRestClient.Items;
+import com.lime.lime.shop.model.modelForRestClient.Position;
+import com.lime.lime.shop.model.modelForRestClient.ResponseModel;
+import com.lime.lime.shop.model.entity.AddressEntity;
+import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.repository.AddressRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

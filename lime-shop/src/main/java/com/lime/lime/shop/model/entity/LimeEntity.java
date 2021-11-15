@@ -1,7 +1,4 @@
-package com.lime.lime.shop.lime;
-
-import com.lime.lime.shop.order.OrderEntity;
-import com.lime.lime.shop.user.UserEntity;
+package com.lime.lime.shop.model.entity;
 
 import javax.persistence.*;
 import java.util.Set;

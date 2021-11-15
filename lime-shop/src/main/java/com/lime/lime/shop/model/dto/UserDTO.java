@@ -1,4 +1,6 @@
-package com.lime.lime.shop.user;
+package com.lime.lime.shop.model.dto;
+
+import com.lime.lime.shop.model.entity.UserEntity;
 
 public class UserDTO {
 

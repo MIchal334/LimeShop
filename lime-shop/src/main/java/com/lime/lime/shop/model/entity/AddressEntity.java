@@ -1,8 +1,7 @@
-package com.lime.lime.shop.address;
+package com.lime.lime.shop.model.entity;
 
-import com.lime.lime.shop.address.modelForRestClient.Position;
-import com.lime.lime.shop.user.UserDTO;
-import com.lime.lime.shop.user.UserEntity;
+import com.lime.lime.shop.model.modelForRestClient.Position;
+import com.lime.lime.shop.model.dto.UserDTO;
 
 import javax.persistence.*;
 

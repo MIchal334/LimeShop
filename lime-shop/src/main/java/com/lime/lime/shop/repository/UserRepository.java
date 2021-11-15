@@ -1,5 +1,6 @@
-package com.lime.lime.shop.user;
+package com.lime.lime.shop.repository;
 
+import com.lime.lime.shop.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

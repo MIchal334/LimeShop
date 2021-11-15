@@ -1,6 +1,6 @@
 package com.lime.lime.shop.dictionaryTable.role;
 
-import com.lime.lime.shop.keycloak.KeycloakConfig;
+import com.lime.lime.shop.security.keycloak.KeycloakConfig;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.stereotype.Service;
 

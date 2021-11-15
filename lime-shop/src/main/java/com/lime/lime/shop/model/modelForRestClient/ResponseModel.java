@@ -1,6 +1,4 @@
-package com.lime.lime.shop.address.modelForRestClient;
-
-import java.util.List;
+package com.lime.lime.shop.model.modelForRestClient;
 
 public class ResponseModel {
     Items items [];

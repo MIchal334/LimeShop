@@ -1,4 +1,4 @@
-package com.lime.lime.shop.security;
+package com.lime.lime.shop.model.entity;
 
 public class TokenModel {
     private String access_token;

@@ -1,10 +1,8 @@
-package com.lime.lime.shop.user;
+package com.lime.lime.shop.model.entity;
 
-import com.lime.lime.shop.address.AddressEntity;
-import com.lime.lime.shop.lime.LimeEntity;
-import com.lime.lime.shop.order.OrderEntity;
 import com.lime.lime.shop.dictionaryTable.ClientPreducentRelation;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
+import com.lime.lime.shop.model.dto.UserDTO;
 
 import javax.persistence.*;
 import java.util.Set;

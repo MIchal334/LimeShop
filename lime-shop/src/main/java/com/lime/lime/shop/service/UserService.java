@@ -1,11 +1,13 @@
-package com.lime.lime.shop.user;
+package com.lime.lime.shop.service;
 
-import com.lime.lime.shop.address.AddressEntity;
-import com.lime.lime.shop.address.AddressService;
-import com.lime.lime.shop.address.modelForRestClient.Position;
+import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.AddressEntity;
+import com.lime.lime.shop.model.entity.UserEntity;
+import com.lime.lime.shop.model.modelForRestClient.Position;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
-import com.lime.lime.shop.keycloak.KeycloakService;
+import com.lime.lime.shop.repository.UserRepository;
+import com.lime.lime.shop.security.keycloak.KeycloakService;
 import com.lime.lime.shop.security.SecurityService;
 import com.lime.lime.shop.validators.UserDataValidator;
 import org.springframework.security.core.Authentication;

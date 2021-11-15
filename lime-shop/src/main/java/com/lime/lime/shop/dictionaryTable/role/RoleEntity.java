@@ -1,6 +1,6 @@
 package com.lime.lime.shop.dictionaryTable.role;
 
-import com.lime.lime.shop.user.UserEntity;
+import com.lime.lime.shop.model.entity.UserEntity;
 
 import javax.persistence.*;
 import java.util.Set;

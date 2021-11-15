@@ -1,12 +1,9 @@
 package com.lime.lime.shop.security;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.lime.lime.shop.model.entity.TokenModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")

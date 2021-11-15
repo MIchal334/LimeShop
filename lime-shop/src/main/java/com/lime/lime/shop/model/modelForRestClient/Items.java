@@ -1,4 +1,4 @@
-package com.lime.lime.shop.address.modelForRestClient;
+package com.lime.lime.shop.model.modelForRestClient;
 
 
 
