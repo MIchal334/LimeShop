@@ -15,4 +15,7 @@ public interface LimeRepository extends JpaRepository<LimeEntity,Long> {
 
     @Query("select distinct l from LimeEntity l where l.owner.id = :id and l.type = :type")
     Optional<LimeEntity> getLimeByTypeAndProducerId(@Param("type") String type,@Param("id") Long id);
+
+    @Query("select distinct l from LimeEntity l where l.id = :id")
+    Optional<LimeEntity> getLimeById(@Param("id")Long id);
 }

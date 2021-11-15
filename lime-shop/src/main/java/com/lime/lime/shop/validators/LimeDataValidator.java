@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class LimeDataValidator {
@@ -19,17 +20,31 @@ public class LimeDataValidator {
         this.limeRepository = limeRepository;
     }
 
-    public void validData(LimeDTO newLime, UserEntity user) {
+    public void validData(LimeDTO newLime, UserEntity user, Boolean isUpdate) {
         amountValidation(newLime.getAmount());
-        typeValidation(newLime.getType(), user.getId());
 
+        if(isUpdate){
+            ownerValidation(newLime.getId(),user.getId());
+        }else {
+            typeValidation(newLime.getType(), user.getId());
+        }
+
+
+    }
+
+    private void ownerValidation(Long limeId, Long userId) {
+       List<LimeEntity> limesOfUser = limeRepository.getAllLimeByProducerId(userId);
+
+       if(!limesOfUser.stream().map(LimeEntity::getId).collect(Collectors.toList()).contains(limeId)){
+           throw new IllegalStateException("You are not a owner this lime");
+       }
     }
 
     private void typeValidation(String type, Long id) {
         Optional<LimeEntity> optionalOfLime = limeRepository.getLimeByTypeAndProducerId(type, id);
 
         if (optionalOfLime.isPresent()){
-            throw  new ResourceAlreadyExistsException("You already have created this lime");
+            throw  new ResourceAlreadyExistsException("You already have added this lime");
         }
 
     }

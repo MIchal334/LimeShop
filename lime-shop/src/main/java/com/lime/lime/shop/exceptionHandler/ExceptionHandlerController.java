@@ -1,6 +1,7 @@
 package com.lime.lime.shop.exceptionHandler;
 
 import com.lime.lime.shop.exceptionHandler.exception.ResourceAlreadyExistsException;
+import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.exceptionHandler.exception.WrongFormatException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,11 @@ public class ExceptionHandlerController {
     @ExceptionHandler(ResourceAlreadyExistsException.class)
     ResponseEntity<Object> handlerItemExistException(ResourceAlreadyExistsException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler(ResourceNotExistsException.class)
+    ResponseEntity<Object> handlerItemNotException(ResourceNotExistsException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler(WrongFormatException.class)

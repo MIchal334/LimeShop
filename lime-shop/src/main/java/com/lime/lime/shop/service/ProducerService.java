@@ -1,5 +1,6 @@
 package com.lime.lime.shop.service;
 
+import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.model.entity.LimeEntity;
@@ -10,6 +11,7 @@ import com.lime.lime.shop.validators.LimeDataValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,9 +53,23 @@ public class ProducerService {
 
     public void addNewLime(LimeDTO newLime) {
         UserEntity user = userService.handleCurrentUser();
-        limeDataValidator.validData(newLime,user);
+        limeDataValidator.validData(newLime,user,false);
         LimeEntity limeToSave = new LimeEntity(newLime,user);
         limeRepository.save(limeToSave);
 
+    }
+
+    public void updateAmountOfLime(Long id, Integer newResource) {
+        UserEntity user = userService.handleCurrentUser();
+        LimeEntity lime = getLimeById(id);
+        limeDataValidator.validData(new LimeDTO(lime),user,true);
+        lime.setAmount(lime.getAmount() + newResource);
+        limeRepository.save(lime);
+    }
+
+    private LimeEntity getLimeById(Long id){
+
+        return limeRepository.getLimeById(id)
+                .orElseThrow(() -> new ResourceNotExistsException("This lime not exist"));
     }
 }
