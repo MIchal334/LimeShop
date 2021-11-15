@@ -1,5 +1,6 @@
 package com.lime.lime.shop.controler;
 
+import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.service.ProducerService;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,12 @@ public class ProducerController {
     @GetMapping
     ResponseEntity<List<ProducerOrderReadModel>> getAllActuallyOrders(){
         List<ProducerOrderReadModel> result = producerService.getActuallyOrders();
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/resource")
+    ResponseEntity<List<LimeDTO>> getAllLimeOfProducer(){
+        List<LimeDTO> result = producerService.getAllLimeOfProducer();
         return ResponseEntity.ok(result);
     }
 }

@@ -44,4 +44,8 @@ public class LimeEntity {
     public UserEntity getOwner() {
         return owner;
     }
+
+    public Boolean isDeleted() {
+        return isDeleted;
+    }
 }
