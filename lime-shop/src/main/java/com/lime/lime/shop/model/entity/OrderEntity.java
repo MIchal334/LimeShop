@@ -1,5 +1,8 @@
 package com.lime.lime.shop.model.entity;
 
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
+import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -29,15 +32,11 @@ public class OrderEntity {
     @Column(name = "date_of_receipt")
     private LocalDateTime dateOfReceipt;
 
-    @Column(name = "is_check")
-    private Boolean isCheck;
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private OrderStatusEntity status;
 
 
-    @Column(name = "is_accept")
-    private Boolean isAccept;
-
-    @Column(name = "is_deleted")
-    private Boolean isDeleted;
 
     public OrderEntity() {
     }
@@ -66,15 +65,7 @@ public class OrderEntity {
         return dateOfReceipt;
     }
 
-    public Boolean isCheck() {
-        return isCheck;
-    }
-
-    public Boolean isAccept() {
-        return isAccept;
-    }
-
-    public Boolean isDeleted() {
-        return isDeleted;
+    public OrderStatusEntity getStatus() {
+        return status;
     }
 }

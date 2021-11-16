@@ -37,7 +37,7 @@ public class ProducerService {
 
         List<ProducerOrderReadModel> orderList = orderRepository.getActuallyOrdersByProducerId(user.getId())
                 .stream()
-                .filter(x -> !x.isDeleted() && x.isAccept() && !x.isCheck())
+//                .filter(x -> !x.isDeleted() && x.isAccept() && !x.isCheck())
                 .map(x -> new ProducerOrderReadModel(x, x.getClient().getAddress()))
                 .collect(Collectors.toList());
 
