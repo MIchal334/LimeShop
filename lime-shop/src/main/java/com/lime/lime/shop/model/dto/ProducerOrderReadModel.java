@@ -21,6 +21,7 @@ public class ProducerOrderReadModel {
     private String limeType;
     private Long amount;
     private LocalDateTime dateOfReceipt;
+    private String status;
 
     public ProducerOrderReadModel() {
     }
@@ -35,5 +36,6 @@ public class ProducerOrderReadModel {
         this.limeType = order.getLime().getType();
         this.amount = order.getAmount();
         this.dateOfReceipt = order.getDateOfReceipt();
+        this.status = order.getStatus().getStatusName();
     }
 }
