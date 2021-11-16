@@ -142,4 +142,21 @@ public class UserEntity {
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
+
+
+    public Set<OrderEntity> getProducerOrders() {
+        return producerOrders;
+    }
+
+    public Set<OrderEntity> getClientOrders() {
+        return clientOrders;
+    }
+
+    public Set<ClientPreducentRelation> getMyDealer() {
+        return myDealer;
+    }
+
+    public Set<ClientPreducentRelation> getMyClient() {
+        return myClient;
+    }
 }

@@ -2,6 +2,7 @@ package com.lime.lime.shop.controler;
 
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
+import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.service.ProducerService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -44,4 +45,18 @@ public class ProducerController {
         producerService.updateAmountOfLime(id,newResource.getAmount());
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @DeleteMapping("/resource/{id}")
+    ResponseEntity<?> deleteOfLime(@PathVariable(name = "id") Long id){
+        producerService.deleteOfLime(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/client")
+    ResponseEntity<List<UserDTO>> getAllClients(){
+        List<UserDTO> result = producerService.getAllClients();
+        return ResponseEntity.ok(result);
+    }
+
+
 }

@@ -58,6 +58,10 @@ public class LimeEntity {
         return isDeleted;
     }
 
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
     public void setAmount(Integer amount) {
         this.amount = amount;
     }

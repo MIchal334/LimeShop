@@ -32,7 +32,7 @@ public class LimeDataValidator {
 
     }
 
-    private void ownerValidation(Long limeId, Long userId) {
+    public void ownerValidation(Long limeId, Long userId) {
        List<LimeEntity> limesOfUser = limeRepository.getAllLimeByProducerId(userId);
 
        if(!limesOfUser.stream().map(LimeEntity::getId).collect(Collectors.toList()).contains(limeId)){
