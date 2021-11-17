@@ -101,19 +101,15 @@ public class ProducerService {
 
     public void changeOrderStatusById(Long orderId, OrderStatusType changeToStatus ) {
         UserEntity user = userService.handleCurrentUser();
-        OrderEntity order =orderService.prepareOrderToChangeStatus(user.getId(),orderId,OrderStatusType.ACCEPTED);
-        order.setStatus(new OrderStatusEntity(OrderStatusType.ACCEPTED));
+        OrderEntity order =orderService.prepareOrderToChangeStatus(user.getId(),orderId,changeToStatus);
+        order.setStatus(new OrderStatusEntity(changeToStatus));
         orderService.save(order);
     }
 
 
-
     private LimeEntity getLimeById(Long id){
-
         return limeRepository.getLimeById(id)
                 .orElseThrow(() -> new ResourceNotExistsException("This lime not exist"));
     }
-
-
 
 }

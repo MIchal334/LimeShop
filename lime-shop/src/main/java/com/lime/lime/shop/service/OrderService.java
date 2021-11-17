@@ -1,11 +1,14 @@
 package com.lime.lime.shop.service;
 
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.OrderRepository;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,9 +16,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@EnableScheduling
 public class OrderService {
 
     private final OrderRepository orderRepository;
+
 
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -80,6 +85,11 @@ public class OrderService {
         }
     }
 
-
+    @Scheduled(cron =  "${corn.setCanceled}")
+    private void setNotAcceptedOldOrderToCanceled(){
+        System.out.println("Zaczynam skan");
+        List<OrderEntity> takeAllOrdersToCanceled = orderRepository.getAllOldOrderToCanceled(LocalDateTime.now());
+        takeAllOrdersToCanceled.forEach(x -> x.setStatus(new OrderStatusEntity(OrderStatusType.CANCELED)));
+    }
 
 }

@@ -54,7 +54,7 @@ public class ProducerController {
     }
 
     @GetMapping("/orderHistory")
-    ResponseEntity<List<ProducerOrderReadModel>> getAllWaitingOrders(){
+    ResponseEntity<List<ProducerOrderReadModel>> getOrdersHistory(){
         List<ProducerOrderReadModel> result = producerService.getAllOrderToHistory();
         return ResponseEntity.ok(result);
     }

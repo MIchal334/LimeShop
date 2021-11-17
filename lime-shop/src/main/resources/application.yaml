@@ -26,3 +26,6 @@ keycloak:
   enabled: true
 
 
+corn:
+  setCanceled: "0 15 0/2 * * *"
+
