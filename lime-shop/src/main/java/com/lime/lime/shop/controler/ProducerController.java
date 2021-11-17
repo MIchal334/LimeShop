@@ -36,8 +36,27 @@ public class ProducerController {
 
     @PutMapping("/order/{id}")
     ResponseEntity<?> acceptOrderById(@PathVariable(name = "id") Long id){
-        producerService.acceptOrderById(id);
+        producerService.changeOrderStatusById(id,OrderStatusType.ACCEPTED);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/order/{id}")
+    ResponseEntity<?> setOrderDoneById(@PathVariable(name = "id") Long id){
+        producerService.changeOrderStatusById(id,OrderStatusType.DONE);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
+    @DeleteMapping("/order/{id}")
+    ResponseEntity<?> cancelOrderById(@PathVariable(name = "id") Long id){
+        producerService.changeOrderStatusById(id,OrderStatusType.DONE);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/orderHistory")
+    ResponseEntity<List<ProducerOrderReadModel>> getAllWaitingOrders(){
+        List<ProducerOrderReadModel> result = producerService.getAllOrderToHistory();
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/resource")

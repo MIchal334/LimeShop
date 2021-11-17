@@ -11,7 +11,6 @@ import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.LimeRepository;
-import com.lime.lime.shop.repository.OrderRepository;
 import com.lime.lime.shop.validators.LimeDataValidator;
 import org.springframework.stereotype.Service;
 
@@ -95,9 +94,14 @@ public class ProducerService {
                 .collect(Collectors.toList());
     }
 
-    public void acceptOrderById(Long orderId) {
+    public List<ProducerOrderReadModel> getAllOrderToHistory() {
         UserEntity user = userService.handleCurrentUser();
-        OrderEntity order =orderService.prepareOrderToAccept(user.getId(),orderId);
+        return orderService.getAllHistoryOrders(user);
+    }
+
+    public void changeOrderStatusById(Long orderId, OrderStatusType changeToStatus ) {
+        UserEntity user = userService.handleCurrentUser();
+        OrderEntity order =orderService.prepareOrderToChangeStatus(user.getId(),orderId,OrderStatusType.ACCEPTED);
         order.setStatus(new OrderStatusEntity(OrderStatusType.ACCEPTED));
         orderService.save(order);
     }
