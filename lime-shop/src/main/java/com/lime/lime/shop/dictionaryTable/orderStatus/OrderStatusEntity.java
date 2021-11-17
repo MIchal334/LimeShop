@@ -23,6 +23,10 @@ public class OrderStatusEntity {
     public OrderStatusEntity() {
     }
 
+    public OrderStatusEntity(OrderStatusType statusName) {
+        this.statusName = statusName.name();
+    }
+
     public Short getId() {
         return id;
     }

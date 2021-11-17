@@ -68,4 +68,8 @@ public class OrderEntity {
     public OrderStatusEntity getStatus() {
         return status;
     }
+
+    public void setStatus(OrderStatusEntity status) {
+        this.status = status;
+    }
 }

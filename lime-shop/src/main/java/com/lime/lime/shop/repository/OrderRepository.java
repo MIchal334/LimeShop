@@ -1,5 +1,6 @@
 package com.lime.lime.shop.repository;
 
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,8 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
     @Query("from OrderEntity o where o.producer.id = :id")
     List<OrderEntity> getActuallyOrdersByProducerId(@Param("id") Long id) ;
+
+    @Query("from  OrderEntity o where o.producer.id =:userId and o.status.statusName = :status")
+    List<OrderEntity> getOrderByStatusAndUserId(@Param("status") String status, @Param("userId") Long userId);
 
 }

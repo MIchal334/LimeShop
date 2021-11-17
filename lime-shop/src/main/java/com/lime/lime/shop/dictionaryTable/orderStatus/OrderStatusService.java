@@ -14,7 +14,7 @@ public class OrderStatusService {
         this.orderStatusRepository = orderStatusRepository;
     }
 
-    public List<OrderEntity> getAllOrderWithStatus(String statusName){
-        return orderStatusRepository.getOrderWithStatus(statusName);
+    public List<OrderEntity> getAllOrderByStatusAndUserId(String statusName, Long userId){
+        return orderStatusRepository.getOrderByStatusAndUserId(statusName,userId);
     }
 }

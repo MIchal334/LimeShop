@@ -1,11 +1,14 @@
 package com.lime.lime.shop.service;
 
 import com.lime.lime.shop.dictionaryTable.ClientPreducentRelation;
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.LimeEntity;
+import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.LimeRepository;
 import com.lime.lime.shop.repository.OrderRepository;
@@ -14,31 +17,31 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class ProducerService {
 
-    private final OrderRepository orderRepository;
     private final UserService userService;
     private final LimeRepository limeRepository;
     private final LimeDataValidator limeDataValidator;
+    private final OrderService orderService;
 
-    public ProducerService(OrderRepository orderRepository, UserService userService, LimeRepository limeRepository, LimeDataValidator limeDataValidator) {
-        this.orderRepository = orderRepository;
+
+    public ProducerService(UserService userService, LimeRepository limeRepository, LimeDataValidator limeDataValidator, OrderService orderService) {
         this.userService = userService;
         this.limeRepository = limeRepository;
         this.limeDataValidator = limeDataValidator;
+        this.orderService = orderService;
     }
 
-    public List<ProducerOrderReadModel> getActuallyOrders() {
+
+    public List<ProducerOrderReadModel> getOrdersByStatus(OrderStatusType statusType) {
         UserEntity user = userService.handleCurrentUser();
 
-        List<ProducerOrderReadModel> orderList = orderRepository.getActuallyOrdersByProducerId(user.getId())
+        List<ProducerOrderReadModel> orderList = orderService.getOrderListByStatusAndUserId(statusType,user.getId())
                 .stream()
-//                .filter(x -> !x.isDeleted() && x.isAccept() && !x.isCheck())
-                .map(x -> new ProducerOrderReadModel(x, x.getClient().getAddress()))
+                .map(x -> new ProducerOrderReadModel(x,x.getClient().getAddress()))
                 .collect(Collectors.toList());
 
         return orderList;
@@ -92,6 +95,13 @@ public class ProducerService {
                 .collect(Collectors.toList());
     }
 
+    public void acceptOrderById(Long orderId) {
+        UserEntity user = userService.handleCurrentUser();
+        OrderEntity order =orderService.prepareOrderToAccept(user.getId(),orderId);
+        order.setStatus(new OrderStatusEntity(OrderStatusType.ACCEPTED));
+        orderService.save(order);
+    }
+
 
 
     private LimeEntity getLimeById(Long id){
@@ -99,5 +109,7 @@ public class ProducerService {
         return limeRepository.getLimeById(id)
                 .orElseThrow(() -> new ResourceNotExistsException("This lime not exist"));
     }
+
+
 
 }

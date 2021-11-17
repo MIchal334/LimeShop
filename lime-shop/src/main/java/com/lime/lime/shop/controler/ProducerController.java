@@ -1,10 +1,10 @@
 package com.lime.lime.shop.controler;
 
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.service.ProducerService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +24,20 @@ public class ProducerController {
 
     @GetMapping
     ResponseEntity<List<ProducerOrderReadModel>> getAllActuallyOrders(){
-        List<ProducerOrderReadModel> result = producerService.getActuallyOrders();
+        List<ProducerOrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.ACCEPTED);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/order")
+    ResponseEntity<List<ProducerOrderReadModel>> getAllWaitingOrders(){
+        List<ProducerOrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.WAITING);
+        return ResponseEntity.ok(result);
+    }
+
+    @PutMapping("/order/{id}")
+    ResponseEntity<?> acceptOrderById(@PathVariable(name = "id") Long id){
+        producerService.acceptOrderById(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/resource")
@@ -57,6 +69,8 @@ public class ProducerController {
         List<UserDTO> result = producerService.getAllClients();
         return ResponseEntity.ok(result);
     }
+
+
 
 
 }

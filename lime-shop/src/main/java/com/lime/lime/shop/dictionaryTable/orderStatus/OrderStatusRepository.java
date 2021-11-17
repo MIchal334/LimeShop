@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface OrderStatusRepository extends JpaRepository<OrderStatusEntity,Short> {
 
-    @Query("select s.orders from OrderStatusEntity s where s.statusName = :status")
-    List<OrderEntity> getOrderWithStatus(@Param("status") String status);
+    @Query("select s.orders from OrderStatusEntity s inner join s.orders o " +
+            "where s.statusName = :status and o.producer.id =:userId")
+    List<OrderEntity> getOrderByStatusAndUserId(@Param("status") String status, @Param("userId") Long userId);
 
 }
