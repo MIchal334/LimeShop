@@ -1,5 +1,6 @@
 package com.lime.lime.shop.service;
 
+import com.lime.lime.shop.dictionaryTable.role.RoleType;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.AddressEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
@@ -69,18 +70,18 @@ public class UserService {
         userDataValidator.validData(newUserData, Optional.of(currentUser));
         UserEntity userToUpdate = prepareUserToUpdate(currentUser, newUserData);
 
-        keycloakService.updateUser(newUserData,oldUsername);
+        keycloakService.updateUser(newUserData, oldUsername);
         keycloakService.addRoleToUser(newUserData);
         UserEntity result = userRepository.save(userToUpdate);
         return result;
 
     }
 
-    public void changePassword( MultiValueMap body) {
+    public void changePassword(MultiValueMap body) {
         String newPassword = String.valueOf(body.get("newPassword"));
-        body.set("username",handleCurrentUser().getUsername());
+        body.set("username", handleCurrentUser().getUsername());
         securityService.getToken(body);
-        keycloakService.changePassword(newPassword,handleCurrentUser().getUsername());
+        keycloakService.changePassword(newPassword, handleCurrentUser().getUsername());
     }
 
     @Transactional
@@ -127,5 +128,15 @@ public class UserService {
     }
 
 
+    public UserEntity getUserByIdAndRole(Long userId, RoleType roleType) {
+        UserEntity user = userRepository.findById(userId)
+                .filter(o -> !o.isDeleted())
+                .orElseThrow(() -> new IllegalStateException("user not exist"));
+
+        if(!user.getRole().getRoleName().equals(roleType.name())){
+            throw new IllegalStateException("This user is not:"+ roleType.name());
+        }
+        return user;
+    }
 
 }

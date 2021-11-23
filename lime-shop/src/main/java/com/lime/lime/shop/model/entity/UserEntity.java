@@ -1,6 +1,4 @@
 package com.lime.lime.shop.model.entity;
-
-import com.lime.lime.shop.dictionaryTable.ClientPreducentRelation;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.model.dto.UserDTO;
 
@@ -51,13 +49,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private Set<OrderEntity> clientOrders;
 
-
-    @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
-    private Set<ClientPreducentRelation> myDealer;
-
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private Set<ClientPreducentRelation> myClient;
 
 
     public UserEntity() {
@@ -143,7 +134,6 @@ public class UserEntity {
         isDeleted = deleted;
     }
 
-
     public Set<OrderEntity> getProducerOrders() {
         return producerOrders;
     }
@@ -152,11 +142,4 @@ public class UserEntity {
         return clientOrders;
     }
 
-    public Set<ClientPreducentRelation> getMyDealer() {
-        return myDealer;
-    }
-
-    public Set<ClientPreducentRelation> getMyClient() {
-        return myClient;
-    }
 }

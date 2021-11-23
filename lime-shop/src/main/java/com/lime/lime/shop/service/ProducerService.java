@@ -1,6 +1,5 @@
 package com.lime.lime.shop.service;
 
-import com.lime.lime.shop.dictionaryTable.ClientPreducentRelation;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
@@ -86,12 +85,13 @@ public class ProducerService {
 
     public List<UserDTO> getAllClients() {
         UserEntity user = userService.handleCurrentUser();
-        return user.getMyClient()
-                .stream()
-                .map(ClientPreducentRelation::getClient)
-                .filter(o -> !o.isDeleted())
-                .map(UserDTO::new)
-                .collect(Collectors.toList());
+        return null;
+//        return user.getMyClient()
+//                .stream()
+//                .map(ClientProducerRelation::getClient)
+//                .filter(o -> !o.isDeleted())
+//                .map(UserDTO::new)
+//                .collect(Collectors.toList());
     }
 
     public List<ProducerOrderReadModel> getAllOrderToHistory() {
@@ -107,9 +107,11 @@ public class ProducerService {
     }
 
 
+
     private LimeEntity getLimeById(Long id){
         return limeRepository.getLimeById(id)
                 .orElseThrow(() -> new ResourceNotExistsException("This lime not exist"));
     }
+
 
 }
