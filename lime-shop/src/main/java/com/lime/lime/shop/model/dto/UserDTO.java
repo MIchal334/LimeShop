@@ -28,6 +28,10 @@ public class UserDTO {
 
     private String roleName;
 
+    private Float lat;
+
+    private Float lon;
+
     public UserDTO() {
     }
 
@@ -43,6 +47,8 @@ public class UserDTO {
         this.houseNumber = user.getAddress().getHouseNumber();
         this.roleName = user.getRole().getRoleName();
         this.postCode = user.getAddress().getPostCode();
+        this.lat = user.getAddress().getLat();
+        this.lon = user.getAddress().getLon();
     }
 
     public String getUsername() {
@@ -110,5 +116,13 @@ public class UserDTO {
 
     public String getPostCode() {
         return postCode;
+    }
+
+    public Float getLat() {
+        return lat;
+    }
+
+    public Float getLon() {
+        return lon;
     }
 }

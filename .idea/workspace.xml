@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef1480d8-671d-4b2f-b230-ee3fd7b7306e" name="Default Changelist" comment="" />
+    <list default="true" id="ef1480d8-671d-4b2f-b230-ee3fd7b7306e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Do przeróbki bazy.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Do przeróbki bazy.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,6 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JupyterTrust" id="32692515-c0b4-464f-9b06-9cd6d205b47a" />
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -40,6 +44,7 @@
       <option name="presentableId" value="Default" />
       <updated>1635966065388</updated>
       <workItem from="1635966067942" duration="142000" />
+      <workItem from="1637254219422" duration="864000" />
     </task>
     <servers />
   </component>

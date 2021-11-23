@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -88,6 +89,11 @@ public class UserService {
         addressService.deleteAddressByUserId(currentUser.getId());
         keycloakService.setDisabled(currentUser.getUsername());
         currentUser.setDeleted(true);
+    }
+
+
+    public List<UserEntity> getAllUserByRoleName(String roleName) {
+        return userRepository.getAllUserByRoleName(roleName);
     }
 
     private UserEntity findUserByUserName(String username) {

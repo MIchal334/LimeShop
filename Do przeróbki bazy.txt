@@ -1,6 +1,7 @@
-	- sprawdzać status zamowień i wystawiać odpowiedni na odpowiednie endpointy
-
-	Do przemyślenia jest czy ciągnąć stety z repo statusów czy z repo zamówień na podstawie statusów
+	- Zajęć się endpiontami clienta 
+	-Zrobić emaiSender
+	-Zrobić testy 
+	-Wystawić Dockera
 	
 
 	

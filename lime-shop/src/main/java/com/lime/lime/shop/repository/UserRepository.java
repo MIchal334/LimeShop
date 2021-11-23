@@ -1,11 +1,13 @@
 package com.lime.lime.shop.repository;
 
+import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,4 +20,8 @@ public interface UserRepository extends JpaRepository<UserEntity,Long>{
 
     @Query("select  distinct  u from  UserEntity u where u.email = :email")
     Optional<UserEntity> getUserByEmail(@Param("email") String email);
+
+    @Query("from  UserEntity u where u.isDeleted = false and u.role.roleName = :roleName")
+    List<UserEntity> getAllUserByRoleName(@Param("roleName") String roleName);
 }
+

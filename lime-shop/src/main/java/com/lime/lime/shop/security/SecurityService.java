@@ -43,7 +43,7 @@ public class SecurityService {
                             TokenModel.class);
         } catch (HttpClientErrorException.Unauthorized e) {
 
-            throw new IllegalStateException("Password is wrong ");
+            throw new IllegalStateException("Password Or Username is wrong ");
 
         } catch (HttpClientErrorException.BadRequest e) {
 
