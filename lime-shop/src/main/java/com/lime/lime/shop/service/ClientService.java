@@ -26,13 +26,13 @@ public class ClientService {
     
     public List<UserDTO> getProducerAssignmentToClient() {
         UserEntity user = userService.handleCurrentUser();
-        return  null;
-//        return user.getMyDealer()
-//                .stream()
-//                .map(ClientProducerRelation::getClient)
-//                .filter(o -> !o.isDeleted())
-//                .map(UserDTO::new)
-//                .collect(Collectors.toList());
+        List<Long> producersAssignToUser = clientProducerRepository.getAllByClientId(user.getId());
+        return userService.getAllUserByRoleName(RoleType.PRODUCER.name())
+                .stream()
+                .filter(o -> !o.isDeleted())
+                .filter(o -> producersAssignToUser.contains(o.getId()))
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
     public List<UserDTO> getAllProducer() {

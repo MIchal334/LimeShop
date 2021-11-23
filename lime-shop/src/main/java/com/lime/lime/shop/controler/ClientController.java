@@ -24,6 +24,12 @@ public class ClientController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/myDealer")
+    ResponseEntity<List<UserDTO>> getProducerAssignToClient(){
+        List<UserDTO> result = clientService.getProducerAssignmentToClient();
+        return ResponseEntity.ok(result);
+    }
+
     @PostMapping("/allDealer/{id}")
     ResponseEntity<?> assignNewProducerToClient(@PathVariable(name = "id") Long producerId ){
         clientService.assignNewDealer(producerId);
