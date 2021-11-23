@@ -7,9 +7,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClientProducerRepository extends JpaRepository<ClientProducerRelation,Long> {
-    @Query("select r.producer from ClientProducerRelation r where r.client = :userId")
+    @Query("select r.producer from ClientProducerRelation r where r.client = :userId and r.isDeleted = false ")
     List<Long> getAllByClientId(@Param("userId") Long id);
+
+    @Query("from ClientProducerRelation r where r.client = :clientId and r.producer = :producerId and r.isDeleted = false ")
+    Optional<ClientProducerRelation> findByClientAndProducerId(@Param("clientId") Long clientId,@Param("producerId") Long producerId);
 }

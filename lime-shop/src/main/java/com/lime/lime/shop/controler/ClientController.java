@@ -36,4 +36,10 @@ public class ClientController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @DeleteMapping("/myDealer/{id}")
+    ResponseEntity<?> deleteAssignDealer(@PathVariable(name = "id")Long producerId){
+        clientService.deleteAssignDealer(producerId);
+        return ResponseEntity.ok().build();
+    }
+
 }

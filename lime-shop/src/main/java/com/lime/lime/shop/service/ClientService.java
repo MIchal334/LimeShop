@@ -50,4 +50,19 @@ public class ClientService {
         clientProducerRepository.save(newRelation);
 
     }
+
+    public void deleteAssignDealer(Long producerId) {
+        UserEntity currentUser = userService.handleCurrentUser();
+        UserEntity dealer = userService.getUserByIdAndRole(producerId,RoleType.PRODUCER);
+        ClientProducerRelation relation = getClientProducerRelation(currentUser.getId(),dealer.getId());
+        relation.setDeleted(true);
+        clientProducerRepository.save(relation);
+
+    }
+
+    private ClientProducerRelation getClientProducerRelation(Long clientId, Long producerId){
+       ClientProducerRelation relation = clientProducerRepository.findByClientAndProducerId(clientId,producerId)
+        .orElseThrow(() -> new IllegalStateException("This dealer is not assign to you"));
+        return relation;
+    }
 }
