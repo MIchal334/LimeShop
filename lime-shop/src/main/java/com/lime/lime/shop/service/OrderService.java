@@ -69,6 +69,14 @@ public class OrderService {
                 .collect(Collectors.toList());
     }
 
+
+    public List<OrderEntity> getAcctuallyOrderForClient(Long userId){
+        List<OrderEntity> allOrderOfClient = orderRepository.findAllByClientId(userId);
+        List<OrderEntity> historyOrderOfClient = orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(), userId);
+        allOrderOfClient.removeAll(historyOrderOfClient);
+        return  allOrderOfClient;
+    }
+
     private void isDealerOfOrder(Long userId, OrderEntity order) {
         if (order.getProducer().getId() != userId) {
             throw new IllegalStateException("This is not your order");

@@ -46,6 +46,13 @@ public class ClientController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/ordersHistory")
+    ResponseEntity<List<OrderReadModel>> getOrdersHistory(){
+        List<OrderReadModel> result = clientService.getAllOrderToHistory();
+        return ResponseEntity.ok(result);
+    }
+
+
     @PostMapping("/myDealer/{id}")
     ResponseEntity<?> getNewOrder(@PathVariable(name = "id") Long producerId, @RequestBody OrderWriteModel order){
         clientService.getNewOrder(producerId,order);

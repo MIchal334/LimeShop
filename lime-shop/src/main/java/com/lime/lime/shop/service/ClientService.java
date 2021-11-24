@@ -16,7 +16,6 @@ import com.lime.lime.shop.repository.ClientProducerRepository;
 import com.lime.lime.shop.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,17 +24,17 @@ public class ClientService {
 
     private final UserService userService;
     private final ClientProducerRepository clientProducerRepository;
-    private final OrderRepository orderRepository;
     private final LimeService limeService;
     private final OrderStatusRepository orderStatusRepository;
+    private final OrderService orderService;
 
 
-    public ClientService(UserService userService, ClientProducerRepository clientProducerRepository, OrderRepository orderRepository, LimeService limeService, OrderStatusRepository orderStatusRepository) {
+    public ClientService(UserService userService, ClientProducerRepository clientProducerRepository, LimeService limeService, OrderStatusRepository orderStatusRepository, OrderService orderService) {
         this.userService = userService;
         this.clientProducerRepository = clientProducerRepository;
-        this.orderRepository = orderRepository;
         this.limeService = limeService;
         this.orderStatusRepository = orderStatusRepository;
+        this.orderService = orderService;
     }
 
 
@@ -85,11 +84,7 @@ public class ClientService {
 
     public List<OrderReadModel> getAllOrderOfClient() {
         UserEntity user = userService.handleCurrentUser();
-
-        List<OrderEntity> allOrderOfClient = orderRepository.findAllByClientId(user.getId());
-        List<OrderEntity> historyOrderOfClient = orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(), user.getId());
-        allOrderOfClient.removeAll(historyOrderOfClient);
-
+        List<OrderEntity> allOrderOfClient = orderService.getAcctuallyOrderForClient(user.getId());
         List<OrderReadModel> listOfOrder = allOrderOfClient.stream()
                 .map(o -> new OrderReadModel(user, o.getLime(), o))
                 .collect(Collectors.toList());
@@ -103,9 +98,11 @@ public class ClientService {
         LimeEntity lime = limeService.getNewOrder(order.getLimeId(),order.getAmount());
 
         OrderStatusEntity orderStatus = orderStatusRepository.getOrderStatusByName(OrderStatusType.WAITING.name());
-
         OrderEntity orderToSave = new OrderEntity(order, currentUser, producer, lime,orderStatus);
-        orderRepository.save(orderToSave);
+
+        orderService.save(orderToSave);
+
+
     }
 
 
@@ -116,4 +113,8 @@ public class ClientService {
     }
 
 
+    public List<OrderReadModel> getAllOrderToHistory() {
+        UserEntity user = userService.handleCurrentUser();
+        return orderService.getAllHistoryOrders(user,RoleType.CLIENT);
+    }
 }
