@@ -57,4 +57,11 @@ public class LimeService {
         limeDataValidator.ownerValidation(lime.getId(), userId);
         lime.setDeleted(true);
     }
+
+    public LimeEntity getNewOrder(Long limeId, Long amount) {
+        LimeEntity lime = getLimeById(limeId);
+        limeDataValidator.validNewOrder(lime,amount);
+        lime.setAmount((int) (lime.getAmount() - amount));
+        return limeRepository.save(lime);
+    }
 }

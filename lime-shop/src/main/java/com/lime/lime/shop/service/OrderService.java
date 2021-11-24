@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType.*;
+
 @Service
 @EnableScheduling
 public class OrderService {
@@ -38,12 +40,14 @@ public class OrderService {
 
         switch (toType) {
             case ACCEPTED:
-                chekIfOrderIsToAccept(toType);
+                chekIfOrderIsToAccept(order.getStatus().getStatusName());
+                break;
             case DONE:
-                chekIfOrderIsToDone(toType);
+                chekIfOrderIsToDone(order.getStatus().getStatusName());
+                break;
             case CANCELED:
-                chekIfOrderIsToCanceled(toType);
-
+                chekIfOrderIsToCanceled(order.getStatus().getStatusName());
+                break;
         }
         return order;
     }
@@ -59,9 +63,9 @@ public class OrderService {
 
     public List<OrderReadModel> getAllHistoryOrders(UserEntity user, RoleType roleType) {
         return orderRepository
-                .findAllHistoryOrdersByUserId(LocalDateTime.now(),user)
+                .findAllHistoryOrdersByUserId(LocalDateTime.now(), user.getId())
                 .stream()
-                .map(o -> new OrderReadModel(getUserFromOrder(roleType,o),o.getLime(),o))
+                .map(o -> new OrderReadModel(getUserFromOrder(roleType, o), o.getLime(), o))
                 .collect(Collectors.toList());
     }
 
@@ -71,37 +75,40 @@ public class OrderService {
         }
     }
 
-    private UserEntity getUserFromOrder(RoleType roleType,OrderEntity order){
-        if(roleType.name().equals("PRODUCER")){
+    private UserEntity getUserFromOrder(RoleType roleType, OrderEntity order) {
+        if (roleType.name().equals("PRODUCER")) {
             return order.getClient();
-        }else {
+        } else {
             return order.getProducer();
         }
     }
 
-    private void chekIfOrderIsToAccept(OrderStatusType toType) {
-        if (!toType.equals(OrderStatusType.WAITING)) {
-            throw new IllegalStateException("You can't accept this. Status is " + toType.name());
+    private void chekIfOrderIsToAccept(String acctualyStatus) {
+        if (!acctualyStatus.equals(WAITING.name())) {
+            throw new IllegalStateException("You can't accept this. Status is " + acctualyStatus);
         }
     }
 
-    private void chekIfOrderIsToDone(OrderStatusType toType) {
-        if (!toType.equals(OrderStatusType.ACCEPTED)) {
-            throw new IllegalStateException("You can't set Done this. Status is " + toType);
+    private void chekIfOrderIsToDone(String acctualyStatus) {
+        if (!acctualyStatus.equals(ACCEPTED.name())) {
+            throw new IllegalStateException("You can't set Done this. Status is " + acctualyStatus);
         }
     }
 
-    private void chekIfOrderIsToCanceled(OrderStatusType toType) {
-        if (toType.equals(OrderStatusType.CANCELED)) {
+    private void chekIfOrderIsToCanceled(String acctualyStatus) {
+        if (acctualyStatus.equals(CANCELED.name())) {
             throw new IllegalStateException("This order has already canceled");
         }
+        if (acctualyStatus.equals(DONE.name())) {
+            throw new IllegalStateException("This order has already done");
+        }
     }
 
-    @Scheduled(cron =  "${corn.setCanceled}")
-    private void setNotAcceptedOldOrderToCanceled(){
+    @Scheduled(cron = "${corn.setCanceled}")
+    private void setNotAcceptedOldOrderToCanceled() {
         System.out.println("Zaczynam skan");
         List<OrderEntity> takeAllOrdersToCanceled = orderRepository.getAllOldOrderToCanceled(LocalDateTime.now());
-        takeAllOrdersToCanceled.forEach(x -> x.setStatus(new OrderStatusEntity(OrderStatusType.CANCELED)));
+        takeAllOrdersToCanceled.forEach(x -> x.setStatus(new OrderStatusEntity(CANCELED)));
     }
 
 }

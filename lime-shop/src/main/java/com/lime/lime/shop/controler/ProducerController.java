@@ -49,7 +49,7 @@ public class ProducerController {
 
     @DeleteMapping("/order/{id}")
     ResponseEntity<?> cancelOrderById(@PathVariable(name = "id") Long id){
-        producerService.changeOrderStatusById(id,OrderStatusType.DONE);
+        producerService.changeOrderStatusById(id,OrderStatusType.CANCELED);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

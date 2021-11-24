@@ -40,6 +40,12 @@ public class LimeDataValidator {
        }
     }
 
+    public void validNewOrder(LimeEntity lime, Long amountInOrder) {
+        amountValidation(amountInOrder);
+        checkIfTooMany(lime.getAmount(),amountInOrder);
+
+    }
+
     private void typeValidation(String type, Long id) {
         Optional<LimeEntity> optionalOfLime = limeRepository.getLimeByTypeAndProducerId(type, id);
 
@@ -54,4 +60,12 @@ public class LimeDataValidator {
             throw new IllegalStateException("The amount should be more then 0");
         }
     }
+
+    private void checkIfTooMany(long amountOfLime, long amountInOrder){
+        if(amountInOrder > amountOfLime){
+            throw  new IllegalStateException("Not enough lime");
+        }
+    }
+
+
 }

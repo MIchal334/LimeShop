@@ -20,11 +20,11 @@ public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
     List<OrderEntity> getOrderByStatusAndUserId(@Param("status") String status, @Param("userId") Long userId);
 
     @Query("from OrderEntity o where o.producer.id = :userId and (o.dateOfReceipt > :now or o.status.statusName = 'DONE' or o.status.statusName = 'CANCELED') ")
-    List<OrderEntity> findAllHistoryOrdersByUserId(@Param("now") LocalDateTime now, @Param("userId") UserEntity userId);
+    List<OrderEntity> findAllHistoryOrdersByUserId(@Param("now") LocalDateTime now, @Param("userId") Long userId);
 
     @Query("from OrderEntity o where  o.dateOfReceipt > :now and o.status.statusName = 'WAITING' ")
     List<OrderEntity> getAllOldOrderToCanceled(LocalDateTime now);
 
-    @Query("from OrderEntity  o where  o.client = :id ")
+    @Query("from OrderEntity  o where  o.client.id = :id ")
     List<OrderEntity> findAllByClientId(@Param("id") Long clientId);
 }

@@ -87,7 +87,7 @@ public class ClientService {
         UserEntity user = userService.handleCurrentUser();
 
         List<OrderEntity> allOrderOfClient = orderRepository.findAllByClientId(user.getId());
-        List<OrderEntity> historyOrderOfClient = orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(), user);
+        List<OrderEntity> historyOrderOfClient = orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(), user.getId());
         allOrderOfClient.removeAll(historyOrderOfClient);
 
         List<OrderReadModel> listOfOrder = allOrderOfClient.stream()
@@ -100,7 +100,8 @@ public class ClientService {
         UserEntity currentUser = userService.handleCurrentUser();
         getClientProducerRelation(currentUser.getId(), producerId);
         UserEntity producer = userService.getUserByIdAndRole(producerId, RoleType.PRODUCER);
-        LimeEntity lime = limeService.getLimeById(order.getLimeId());
+        LimeEntity lime = limeService.getNewOrder(order.getLimeId(),order.getAmount());
+
         OrderStatusEntity orderStatus = orderStatusRepository.getOrderStatusByName(OrderStatusType.WAITING.name());
 
         OrderEntity orderToSave = new OrderEntity(order, currentUser, producer, lime,orderStatus);
