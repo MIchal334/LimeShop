@@ -89,7 +89,7 @@ public class ProducerService {
 
     public void changeOrderStatusById(Long orderId, OrderStatusType changeToStatus) {
         UserEntity user = userService.handleCurrentUser();
-        OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(), orderId, changeToStatus);
+        OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(), orderId, changeToStatus,RoleType.PRODUCER);
         order.setStatus(orderStatusRepository.getOrderStatusByName(changeToStatus.name()));
         orderService.save(order);
     }

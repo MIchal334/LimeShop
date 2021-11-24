@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.ForbiddenException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,9 +35,17 @@ public class OrderService {
         return orderRepository.getOrderByStatusAndUserId(statusType.name(), id);
     }
 
-    public OrderEntity prepareOrderToChangeStatus(Long userId, Long orderId, OrderStatusType toType) {
+    public OrderEntity prepareOrderToChangeStatus(Long userId, Long orderId, OrderStatusType toType,RoleType roleType) {
         OrderEntity order = getOrderById(orderId);
-        isDealerOfOrder(userId, order);
+
+        if(roleType.equals(RoleType.PRODUCER)){
+            isDealerOfOrder(userId, order);
+        }else if(roleType.equals(RoleType.CLIENT)){
+            isClientOfOrder(userId,order);
+        }else {
+            throw new IllegalStateException("Not access to this order");
+        }
+
 
         switch (toType) {
             case ACCEPTED:
@@ -82,6 +91,14 @@ public class OrderService {
             throw new IllegalStateException("This is not your order");
         }
     }
+
+    private void isClientOfOrder(Long userId, OrderEntity order) {
+        if (order.getClient().getId() != userId) {
+            throw new IllegalStateException("This is not your order");
+        }
+    }
+
+
 
     private UserEntity getUserFromOrder(RoleType roleType, OrderEntity order) {
         if (roleType.name().equals("PRODUCER")) {

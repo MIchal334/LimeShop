@@ -14,6 +14,7 @@ import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.ClientProducerRepository;
 import com.lime.lime.shop.repository.OrderRepository;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -105,6 +106,19 @@ public class ClientService {
 
     }
 
+    public List<OrderReadModel> getAllOrderToHistory() {
+        UserEntity user = userService.handleCurrentUser();
+        return orderService.getAllHistoryOrders(user,RoleType.CLIENT);
+    }
+
+    public void deleteOrderById(Long orderId) {
+        UserEntity user = userService.handleCurrentUser();
+        OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(),orderId,OrderStatusType.CANCELED,RoleType.CLIENT);
+        order.setStatus(orderStatusRepository.getOrderStatusByName(OrderStatusType.CANCELED.name()));
+        orderService.save(order);
+
+    }
+
 
     private ClientProducerRelation getClientProducerRelation(Long clientId, Long producerId) {
         ClientProducerRelation relation = clientProducerRepository.findByClientAndProducerId(clientId, producerId)
@@ -113,8 +127,5 @@ public class ClientService {
     }
 
 
-    public List<OrderReadModel> getAllOrderToHistory() {
-        UserEntity user = userService.handleCurrentUser();
-        return orderService.getAllHistoryOrders(user,RoleType.CLIENT);
-    }
+
 }
