@@ -3,7 +3,6 @@ package com.lime.lime.shop.service;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
-import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
@@ -11,8 +10,6 @@ import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.ClientProducerRepository;
-import com.lime.lime.shop.repository.LimeRepository;
-import com.lime.lime.shop.validators.LimeDataValidator;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,18 +20,16 @@ import java.util.stream.Collectors;
 public class ProducerService {
 
     private final UserService userService;
-    private final LimeRepository limeRepository;
-    private final LimeDataValidator limeDataValidator;
     private final OrderService orderService;
     private final ClientProducerRepository clientProducerRepository;
+    private final LimeService limeService;
 
 
-    public ProducerService(UserService userService, LimeRepository limeRepository, LimeDataValidator limeDataValidator, OrderService orderService, ClientProducerRepository clientProducerRepository) {
+    public ProducerService(UserService userService, OrderService orderService, ClientProducerRepository clientProducerRepository, LimeService limeService) {
         this.userService = userService;
-        this.limeRepository = limeRepository;
-        this.limeDataValidator = limeDataValidator;
         this.orderService = orderService;
         this.clientProducerRepository = clientProducerRepository;
+        this.limeService = limeService;
     }
 
 
@@ -51,39 +46,25 @@ public class ProducerService {
 
     public List<LimeDTO> getAllLimeOfProducer() {
         UserEntity user = userService.handleCurrentUser();
-        List<LimeDTO> listOfLime = limeRepository.getAllLimeByProducerId(user.getId())
-                .stream()
-                .filter(x -> !x.isDeleted())
-                .map(LimeDTO::new)
-                .collect(Collectors.toList());
+        List<LimeDTO> listOfLime = limeService.getAllLimeByProducerId(user.getId());
         return listOfLime;
     }
 
     public void addNewLime(LimeDTO newLime) {
         UserEntity user = userService.handleCurrentUser();
-        limeDataValidator.validData(newLime, user, false);
-        LimeEntity limeToSave = new LimeEntity(newLime, user);
-        limeRepository.save(limeToSave);
+        limeService.saveNewLime(newLime,user);
 
     }
 
-    public void updateAmountOfLime(Long id, Integer newResource) {
+    public void updateAmountOfLime(Long limeId, Integer newResource) {
         UserEntity user = userService.handleCurrentUser();
-        LimeEntity lime = getLimeById(id);
-        int oldAmount = lime.getAmount();
-        lime.setAmount(newResource);
-
-        limeDataValidator.validData(new LimeDTO(lime), user, true);
-        lime.setAmount(oldAmount + newResource);
-        limeRepository.save(lime);
+        limeService.updateLime(limeId,newResource,user);
     }
 
     @Transactional
-    public void deleteOfLime(Long id) {
+    public void deleteOfLime(Long limeId) {
         UserEntity user = userService.handleCurrentUser();
-        LimeEntity lime = getLimeById(id);
-        limeDataValidator.ownerValidation(lime.getId(), user.getId());
-        lime.setDeleted(true);
+        limeService.deleteLimeById(limeId,user.getId());
     }
 
 
@@ -112,10 +93,7 @@ public class ProducerService {
     }
 
 
-    private LimeEntity getLimeById(Long id) {
-        return limeRepository.getLimeById(id)
-                .orElseThrow(() -> new ResourceNotExistsException("This lime not exist"));
-    }
+
 
 
 }

@@ -1,7 +1,10 @@
 package com.lime.lime.shop.model.entity;
 
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusRepository;
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
+import com.lime.lime.shop.model.dto.OrderWriteModel;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -39,6 +42,15 @@ public class OrderEntity {
 
 
     public OrderEntity() {
+    }
+
+    public OrderEntity(OrderWriteModel order, UserEntity client, UserEntity producer, LimeEntity lime, OrderStatusEntity orderStatus) {
+        this.producer = producer;
+        this.client = client;
+        this.lime = lime;
+        this.amount = order.getAmount();
+        this.dateOfReceipt = order.getDateOfReceipt();
+        this.status = orderStatus;
     }
 
     public Long getId() {

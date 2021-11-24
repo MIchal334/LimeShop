@@ -15,4 +15,7 @@ public interface OrderStatusRepository extends JpaRepository<OrderStatusEntity,S
             "where s.statusName = :status and o.producer.id =:userId")
     List<OrderEntity> getOrderByStatusAndUserId(@Param("status") String status, @Param("userId") Long userId);
 
+    @Query("select os from OrderStatusEntity os where os.statusName = :name")
+    OrderStatusEntity getOrderStatusByName(@Param("name") String statusName);
+
 }

@@ -2,7 +2,9 @@ package com.lime.lime.shop.controler;
 
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
+import com.lime.lime.shop.model.dto.OrderWriteModel;
 import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +44,12 @@ public class ClientController {
     ResponseEntity<List<OrderReadModel>> getOrderOfClient(){
         List<OrderReadModel> result = clientService.getAllOrderOfClient();
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/myDealer/{id}")
+    ResponseEntity<?> getNewOrder(@PathVariable(name = "id") Long producerId, @RequestBody OrderWriteModel order){
+        clientService.getNewOrder(producerId,order);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/allDealer/{id}")
