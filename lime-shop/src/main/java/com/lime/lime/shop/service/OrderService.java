@@ -1,6 +1,7 @@
 package com.lime.lime.shop.service;
 
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusRepository;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
@@ -12,7 +13,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.ws.rs.ForbiddenException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,10 +24,12 @@ import static com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType.*;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderStatusRepository orderStatusRepository;
 
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderStatusRepository orderStatusRepository) {
         this.orderRepository = orderRepository;
+        this.orderStatusRepository = orderStatusRepository;
     }
 
 
@@ -84,6 +86,17 @@ public class OrderService {
         List<OrderEntity> historyOrderOfClient = orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(), userId);
         allOrderOfClient.removeAll(historyOrderOfClient);
         return  allOrderOfClient;
+    }
+
+
+    public void deleteAllByUerId(Long userId) {
+        List<OrderEntity> orderWithUser = orderRepository.getOrderWithUserById(userId);
+        orderWithUser
+                .stream()
+                .filter(o -> !o.getStatus().getStatusName().equals(DONE.name()))
+                .forEach(o -> {
+            o.setStatus(orderStatusRepository.getOrderStatusByName(OrderStatusType.CANCELED.name()));
+        });
     }
 
     private void isDealerOfOrder(Long userId, OrderEntity order) {

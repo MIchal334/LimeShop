@@ -34,25 +34,6 @@ public class ProducerController {
         return ResponseEntity.ok(result);
     }
 
-    @PutMapping("/order/{id}")
-    ResponseEntity<?> acceptOrderById(@PathVariable(name = "id") Long id){
-        producerService.changeOrderStatusById(id,OrderStatusType.ACCEPTED);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PatchMapping("/order/{id}")
-    ResponseEntity<?> setOrderDoneById(@PathVariable(name = "id") Long id){
-        producerService.changeOrderStatusById(id,OrderStatusType.DONE);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-
-    @DeleteMapping("/order/{id}")
-    ResponseEntity<?> cancelOrderById(@PathVariable(name = "id") Long id){
-        producerService.changeOrderStatusById(id,OrderStatusType.CANCELED);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
     @GetMapping("/orderHistory")
     ResponseEntity<List<OrderReadModel>> getOrdersHistory(){
         List<OrderReadModel> result = producerService.getAllOrderToHistory();
@@ -65,10 +46,30 @@ public class ProducerController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/client")
+    ResponseEntity<List<UserDTO>> getAllClients(){
+        List<UserDTO> result = producerService.getAllClients();
+        return ResponseEntity.ok(result);
+    }
+
+
+
     @PostMapping("/resource")
     ResponseEntity<?> addNewLime(@RequestBody LimeDTO newLime){
         producerService.addNewLime(newLime);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/order/{id}")
+    ResponseEntity<?> acceptOrderById(@PathVariable(name = "id") Long id){
+        producerService.changeOrderStatusById(id,OrderStatusType.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/order/{id}")
+    ResponseEntity<?> setOrderDoneById(@PathVariable(name = "id") Long id){
+        producerService.changeOrderStatusById(id,OrderStatusType.DONE);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PatchMapping("/resource/{id}")
@@ -77,19 +78,19 @@ public class ProducerController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+
+    @DeleteMapping("/order/{id}")
+    ResponseEntity<?> cancelOrderById(@PathVariable(name = "id") Long id){
+        producerService.changeOrderStatusById(id,OrderStatusType.CANCELED);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
     @DeleteMapping("/resource/{id}")
     ResponseEntity<?> deleteOfLime(@PathVariable(name = "id") Long id){
         producerService.deleteOfLime(id);
         return ResponseEntity.ok().build();
     }
-
-    @GetMapping("/client")
-    ResponseEntity<List<UserDTO>> getAllClients(){
-        List<UserDTO> result = producerService.getAllClients();
-        return ResponseEntity.ok(result);
-    }
-
-
 
 
 }

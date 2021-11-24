@@ -1,5 +1,6 @@
 package com.lime.lime.shop.service;
 
+import com.lime.lime.shop.dictionaryTable.ClientProducerRelation;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.AddressEntity;
@@ -7,6 +8,7 @@ import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.model.modelForRestClient.Position;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
+import com.lime.lime.shop.repository.ClientProducerRepository;
 import com.lime.lime.shop.repository.UserRepository;
 import com.lime.lime.shop.security.keycloak.KeycloakService;
 import com.lime.lime.shop.security.SecurityService;
@@ -29,14 +31,20 @@ public class UserService {
     private final UserDataValidator userDataValidator;
     private final KeycloakService keycloakService;
     private final SecurityService securityService;
+    private final LimeService limeService;
+    private final OrderService orderService;
+    private final ClientProducerRepository clientProducerRepository;
 
-    public UserService(RoleService roleService, UserRepository userRepository, AddressService addressService, UserDataValidator userDataValidator, KeycloakService keycloakService, SecurityService securityService) {
+    public UserService(RoleService roleService, UserRepository userRepository, AddressService addressService, UserDataValidator userDataValidator, KeycloakService keycloakService, SecurityService securityService, LimeService limeService, OrderService orderService, ClientProducerRepository clientProducerRepository) {
         this.roleService = roleService;
         this.userRepository = userRepository;
         this.addressService = addressService;
         this.userDataValidator = userDataValidator;
         this.keycloakService = keycloakService;
         this.securityService = securityService;
+        this.limeService = limeService;
+        this.orderService = orderService;
+        this.clientProducerRepository = clientProducerRepository;
     }
 
 
@@ -88,6 +96,13 @@ public class UserService {
     public void deleteUser() {
         UserEntity currentUser = handleCurrentUser();
         addressService.deleteAddressByUserId(currentUser.getId());
+        orderService.deleteAllByUerId(currentUser.getId());
+        deleteClientProducerRelationByUserId(currentUser.getId());
+
+        if (currentUser.getRole().getRoleName().equals(RoleType.PRODUCER.name())) {
+            limeService.deleteAllByUserId(currentUser.getId());
+        }
+
         keycloakService.setDisabled(currentUser.getUsername());
         currentUser.setDeleted(true);
     }
@@ -95,6 +110,17 @@ public class UserService {
 
     public List<UserEntity> getAllUserByRoleName(String roleName) {
         return userRepository.getAllUserByRoleName(roleName);
+    }
+
+    public UserEntity getUserByIdAndRole(Long userId, RoleType roleType) {
+        UserEntity user = userRepository.findById(userId)
+                .filter(o -> !o.isDeleted())
+                .orElseThrow(() -> new IllegalStateException("user not exist"));
+
+        if (!user.getRole().getRoleName().equals(roleType.name())) {
+            throw new IllegalStateException("This user is not:" + roleType.name());
+        }
+        return user;
     }
 
     private UserEntity findUserByUserName(String username) {
@@ -127,16 +153,15 @@ public class UserService {
         return currentUser;
     }
 
-
-    public UserEntity getUserByIdAndRole(Long userId, RoleType roleType) {
-        UserEntity user = userRepository.findById(userId)
-                .filter(o -> !o.isDeleted())
-                .orElseThrow(() -> new IllegalStateException("user not exist"));
-
-        if(!user.getRole().getRoleName().equals(roleType.name())){
-            throw new IllegalStateException("This user is not:"+ roleType.name());
-        }
-        return user;
+    private void deleteClientProducerRelationByUserId(Long id){
+       List<ClientProducerRelation> allRelations = clientProducerRepository.getAllRelationByUserId(id);
+       allRelations
+               .stream()
+               .filter(r -> !r.isDeleted())
+               .forEach(r -> {
+                   r.setDeleted(true);
+               });
     }
+
 
 }

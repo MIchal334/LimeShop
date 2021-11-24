@@ -17,8 +17,6 @@ public class UserController {
     private final UserService userService;
 
 
-
-
     public UserController(UserService userService) {
         this.userService = userService;
 
@@ -28,6 +26,12 @@ public class UserController {
     public ResponseEntity<UserDTO> getCurrentUser(){
         UserDTO user = new UserDTO(userService.handleCurrentUser());
         return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<UserEntity> addNewUser(@RequestBody UserDTO newUser ){
+        UserEntity result = userService.creteNewAccount(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
     @PutMapping("/profile")
@@ -44,17 +48,12 @@ public class UserController {
     }
 
 
-
     @DeleteMapping("/profile")
     public ResponseEntity<?> deleteProfile(){
         userService.deleteUser();
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<UserEntity> addNewUser(@RequestBody UserDTO newUser ){
-        UserEntity result = userService.creteNewAccount(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(result);
-    }
+
 
 }

@@ -45,7 +45,7 @@ public class ClientProducerRelation {
         this.client = client;
     }
 
-    public Boolean getDeleted() {
+    public Boolean isDeleted() {
         return isDeleted;
     }
 

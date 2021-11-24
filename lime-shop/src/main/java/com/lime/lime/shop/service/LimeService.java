@@ -64,4 +64,13 @@ public class LimeService {
         lime.setAmount((int) (lime.getAmount() - amount));
         return limeRepository.save(lime);
     }
+
+    public void deleteAllByUserId(Long producerId) {
+        List<LimeEntity> allLimeOfProducer = limeRepository.getAllLimeByProducerId(producerId);
+
+        allLimeOfProducer.forEach(o ->{
+            o.setDeleted(true);
+            limeRepository.save(o);
+        });
+    }
 }

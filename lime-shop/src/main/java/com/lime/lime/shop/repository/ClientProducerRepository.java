@@ -19,4 +19,7 @@ public interface ClientProducerRepository extends JpaRepository<ClientProducerRe
 
     @Query("from ClientProducerRelation r where r.client = :clientId and r.producer = :producerId and r.isDeleted = false ")
     Optional<ClientProducerRelation> findByClientAndProducerId(@Param("clientId") Long clientId,@Param("producerId") Long producerId);
+
+    @Query("from ClientProducerRelation r where r.client = :id or r.producer = :id")
+    List<ClientProducerRelation> getAllRelationByUserId(@Param("id") Long userId);
 }
