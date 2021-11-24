@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Service
 public class AddressService {
 
-    private final String apiKye = "MLxhCMtKlAdQO78ofvQ3dfcitPZFzHO3MyeN5Lpkvro";
+    private final String apiKye = "6E-MqWwkVrVCCYnKuzrZI44lovTIyN-YBhm6rwdTqnU";
     private final AddressRepository addressRepository;
 
     public AddressService(AddressRepository addressRepository) {

@@ -12,7 +12,10 @@ import java.util.Optional;
 @Repository
 public interface ClientProducerRepository extends JpaRepository<ClientProducerRelation,Long> {
     @Query("select r.producer from ClientProducerRelation r where r.client = :userId and r.isDeleted = false ")
-    List<Long> getAllByClientId(@Param("userId") Long id);
+    List<Long> getAllProducerByClientId(@Param("userId") Long id);
+
+    @Query("select r.client from ClientProducerRelation r where r.producer = :userId and r.isDeleted = false ")
+    List<Long> getAllClientByProducerId(@Param("userId") Long id);
 
     @Query("from ClientProducerRelation r where r.client = :clientId and r.producer = :producerId and r.isDeleted = false ")
     Optional<ClientProducerRelation> findByClientAndProducerId(@Param("clientId") Long clientId,@Param("producerId") Long producerId);
