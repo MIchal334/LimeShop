@@ -2,7 +2,7 @@ package com.lime.lime.shop.controler;
 
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.model.dto.LimeDTO;
-import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
+import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.service.ProducerService;
 import org.springframework.http.HttpStatus;
@@ -23,14 +23,14 @@ public class ProducerController {
     }
 
     @GetMapping
-    ResponseEntity<List<ProducerOrderReadModel>> getAllActuallyOrders(){
-        List<ProducerOrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.ACCEPTED);
+    ResponseEntity<List<OrderReadModel>> getAllActuallyOrders(){
+        List<OrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.ACCEPTED);
         return ResponseEntity.ok(result);
     }
 
     @GetMapping("/order")
-    ResponseEntity<List<ProducerOrderReadModel>> getAllWaitingOrders(){
-        List<ProducerOrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.WAITING);
+    ResponseEntity<List<OrderReadModel>> getAllWaitingOrders(){
+        List<OrderReadModel> result = producerService.getOrdersByStatus(OrderStatusType.WAITING);
         return ResponseEntity.ok(result);
     }
 
@@ -54,8 +54,8 @@ public class ProducerController {
     }
 
     @GetMapping("/orderHistory")
-    ResponseEntity<List<ProducerOrderReadModel>> getOrdersHistory(){
-        List<ProducerOrderReadModel> result = producerService.getAllOrderToHistory();
+    ResponseEntity<List<OrderReadModel>> getOrdersHistory(){
+        List<OrderReadModel> result = producerService.getAllOrderToHistory();
         return ResponseEntity.ok(result);
     }
 

@@ -5,7 +5,7 @@ import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
 import com.lime.lime.shop.model.dto.LimeDTO;
-import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
+import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.OrderEntity;
@@ -38,12 +38,12 @@ public class ProducerService {
     }
 
 
-    public List<ProducerOrderReadModel> getOrdersByStatus(OrderStatusType statusType) {
+    public List<OrderReadModel> getOrdersByStatus(OrderStatusType statusType) {
         UserEntity user = userService.handleCurrentUser();
 
-        List<ProducerOrderReadModel> orderList = orderService.getOrderListByStatusAndUserId(statusType, user.getId())
+        List<OrderReadModel> orderList = orderService.getOrderListByStatusAndUserId(statusType, user.getId())
                 .stream()
-                .map(x -> new ProducerOrderReadModel(x, x.getClient().getAddress()))
+                .map(x -> new OrderReadModel(x.getClient(),x.getLime(),x))
                 .collect(Collectors.toList());
 
         return orderList;
@@ -99,9 +99,9 @@ public class ProducerService {
                 .collect(Collectors.toList());
     }
 
-    public List<ProducerOrderReadModel> getAllOrderToHistory() {
+    public List<OrderReadModel> getAllOrderToHistory() {
         UserEntity user = userService.handleCurrentUser();
-        return orderService.getAllHistoryOrders(user);
+        return orderService.getAllHistoryOrders(user,RoleType.PRODUCER);
     }
 
     public void changeOrderStatusById(Long orderId, OrderStatusType changeToStatus) {

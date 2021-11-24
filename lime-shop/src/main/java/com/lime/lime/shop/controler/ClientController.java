@@ -1,6 +1,7 @@
 package com.lime.lime.shop.controler;
 
 import com.lime.lime.shop.model.dto.LimeDTO;
+import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.service.ClientService;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,12 @@ public class ClientController {
     @GetMapping("/myDealer/{id}")
     ResponseEntity<List<LimeDTO>> getLimeOfDealer(@PathVariable(name = "id") Long producerId){
         List<LimeDTO> result = clientService.getAllLimeByDealerId(producerId);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping
+    ResponseEntity<List<OrderReadModel>> getOrderOfClient(){
+        List<OrderReadModel> result = clientService.getAllOrderOfClient();
         return ResponseEntity.ok(result);
     }
 

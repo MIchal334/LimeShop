@@ -2,8 +2,9 @@ package com.lime.lime.shop.service;
 
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
+import com.lime.lime.shop.dictionaryTable.role.RoleType;
 import com.lime.lime.shop.exceptionHandler.exception.ResourceNotExistsException;
-import com.lime.lime.shop.model.dto.ProducerOrderReadModel;
+import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.OrderRepository;
@@ -12,8 +13,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @EnableScheduling
@@ -56,15 +57,26 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List<ProducerOrderReadModel> getAllHistoryOrders(UserEntity userId) {
-        return orderRepository.findAllHistoryOrdersByUserId(LocalDateTime.now(),userId);
+    public List<OrderReadModel> getAllHistoryOrders(UserEntity user, RoleType roleType) {
+        return orderRepository
+                .findAllHistoryOrdersByUserId(LocalDateTime.now(),user)
+                .stream()
+                .map(o -> new OrderReadModel(getUserFromOrder(roleType,o),o.getLime(),o))
+                .collect(Collectors.toList());
     }
 
     private void isDealerOfOrder(Long userId, OrderEntity order) {
         if (order.getProducer().getId() != userId) {
             throw new IllegalStateException("This is not your order");
         }
+    }
 
+    private UserEntity getUserFromOrder(RoleType roleType,OrderEntity order){
+        if(roleType.name().equals("PRODUCER")){
+            return order.getClient();
+        }else {
+            return order.getProducer();
+        }
     }
 
     private void chekIfOrderIsToAccept(OrderStatusType toType) {

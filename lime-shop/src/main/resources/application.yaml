@@ -12,6 +12,9 @@ spring:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
 
+  main:
+    banner-mode: off
+
 server:
   port: 8081
 
