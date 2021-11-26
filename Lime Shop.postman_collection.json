@@ -35,16 +35,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc2NTIwMzAsImlhdCI6MTYzNzY1MTczMCwianRpIjoiOGY4YjZhZTctZjY3My00Yzg5LWJlYjItMmE3ODUyOTBlZjJiIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI2NmQ1MDEyMi05NDA5LTRjODgtOWI2Zi1kYmQ1YjFlMjkzNDUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjUzZjU0NTg0LTljZTAtNDViMi04OWI2LTcxZWI1M2U2ODA0MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGltZS1zaG9wIiwidW1hX2F1dGhvcml6YXRpb24iLCJDTElFTlQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI1M2Y1NDU4NC05Y2UwLTQ1YjItODliNi03MWViNTNlNjgwNDEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QxIiwiZW1haWwiOiJlYWlsZDFAdGVzdC5wbCJ9.S8zrnXuswDeZ6FrpC0URzkryn_poH5-VV2pl0Vt5aKJ6hhOKaTLqzHWZgGSLTMf1UMZMfcVJfe9CcizQRUgByb4LdeDpsIMDco6pkApGJJdx45zmNJxNqNc5cb3LuRSOTFmB0rk-KzniSN2S2Lr0plN8sldjNtTzNYSD_ZS_OuvOVQJ0ipmG5ZbDnXb6407hbmyDQj8Xlu3wdZHfv6lPT65XURTyeb34_FRpx4FjKoT0qU15lHDpsROFjkvfF5SOLnrbwc1XLDKTORBlc7TXx5RLXkT7paifbXiBsIsrDIfeTLcaOrYtpDIgxDDUzFC8MUendbWW7CS65xKE3FugrQ",
 									"type": "string"
 								}
 							]
@@ -59,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,14 +62,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/cielnt/allDealer",
+							"raw": "http://localhost:8081/client/allDealer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
-								"cielnt",
+								"client",
 								"allDealer"
 							]
 						}
@@ -105,16 +100,11 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc2NTUwOTAsImlhdCI6MTYzNzY1NDc5MCwianRpIjoiN2ZiY2ZkYWYtNWE3NS00NDkwLTgzMTQtNDEzYWU2NTA5YzU3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI2NmQ1MDEyMi05NDA5LTRjODgtOWI2Zi1kYmQ1YjFlMjkzNDUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImVkNTkzOGM0LTRhMWQtNDA5Yy1iMjdmLTkxZWQ5YmM0M2U2NSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGltZS1zaG9wIiwidW1hX2F1dGhvcml6YXRpb24iLCJDTElFTlQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJlZDU5MzhjNC00YTFkLTQwOWMtYjI3Zi05MWVkOWJjNDNlNjUiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QxIiwiZW1haWwiOiJlYWlsZDFAdGVzdC5wbCJ9.h4i5moATVtC7t0jdd2ZWlRI_LrPJPNg1iTyLY0iJ-frSDOu4iQUsFbKqVUl2ZMPOv9Sy6Skj9-PRtIvWGO2LuM2GlQjhiF3t2L-H6D0Y0vqJTKdc19tFBXXy0FGGsEqxUFvgQoMmSKJYgussN3c5cDqpUOJ7JJtOVDjdmvm7pdSdyWjw-MsyRCekWskdFahplJ7_upwhsSDWDFePpIUkzLKfgtcfIYCqvvNhuIjmvhCSYKvPQnB8zdBruD9KKfgbblsm-mlro9Gxi8MaBQ68ytOaplOBwOnNg9PLwm8h53lYzH3-bLP6jtSebxhaygzDG06xraEAZw0x7iXEqNFUYg",
 									"type": "string"
 								}
 							]
@@ -129,7 +119,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -137,87 +127,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/cielnt/allDealer/{id}",
+							"raw": "http://localhost:8081/client/allDealer/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"cielnt",
+								"client",
 								"allDealer",
-								"{id}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete dealer from client's list",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"new post\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"check content msg\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
-									"    pm.expect(jsonData.done).to.eql(false);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/cielnt/allDealer/{id}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"cielnt",
-								"allDealer",
-								"{id}"
+								"6"
 							]
 						}
 					},
@@ -250,16 +169,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc2NTYwMzMsImlhdCI6MTYzNzY1NTczMywianRpIjoiMzFlZjA1ZjAtYjA2Mi00MTE5LWEzOWEtN2Q0MGQwOWEwYjA2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI2NmQ1MDEyMi05NDA5LTRjODgtOWI2Zi1kYmQ1YjFlMjkzNDUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImZmMDc2OTNjLWI0NmQtNDZkNy1iYmNhLTE3NzEyYjMwYWU1NCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGltZS1zaG9wIiwidW1hX2F1dGhvcml6YXRpb24iLCJDTElFTlQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmZjA3NjkzYy1iNDZkLTQ2ZDctYmJjYS0xNzcxMmIzMGFlNTQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QxIiwiZW1haWwiOiJlYWlsZDFAdGVzdC5wbCJ9.b-wHzcrkwcXY0U8dNKc8bQ8hcKhgOAdEZkl4JFEwcXFlBxOJIQnlROOZja0RZeY2ANeQ9xc31fBV9hCgi49y1cSvUJxuFKtHGrLwxNrcwCV2eR-VtxnV2jHdCeXAyG1kUTxMSSGgvXV-1MWXPV1z6dqIpgUo9uR8L2IS16vZ8vdqZHnhAm-Jv6ScdiGGh40e-f5hkrCwl8nlHiQuBdDHukDkdyFIZ_5Gr3jncoMaiFhzt7Jgk5OQOv5NM7oyQeIJy33i0IZ9EMdDK8Y5qgOKjY9UxD4UAiBqN6ShkdWIimks4tKyqWPLVLVJX9NXvcBBVpewoqe6eDdHMNgxtJ5tTg",
 									"type": "string"
 								}
 							]
@@ -282,15 +196,81 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/cielnt/myDealer",
+							"raw": "http://localhost:8081/client/myDealer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"cielnt",
+								"client",
 								"myDealer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete dealer from client's list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"new post\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"check content msg\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
+									"    pm.expect(jsonData.done).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc2NTYwMzMsImlhdCI6MTYzNzY1NTczMywianRpIjoiMzFlZjA1ZjAtYjA2Mi00MTE5LWEzOWEtN2Q0MGQwOWEwYjA2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI2NmQ1MDEyMi05NDA5LTRjODgtOWI2Zi1kYmQ1YjFlMjkzNDUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImZmMDc2OTNjLWI0NmQtNDZkNy1iYmNhLTE3NzEyYjMwYWU1NCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGltZS1zaG9wIiwidW1hX2F1dGhvcml6YXRpb24iLCJDTElFTlQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJmZjA3NjkzYy1iNDZkLTQ2ZDctYmJjYS0xNzcxMmIzMGFlNTQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QxIiwiZW1haWwiOiJlYWlsZDFAdGVzdC5wbCJ9.b-wHzcrkwcXY0U8dNKc8bQ8hcKhgOAdEZkl4JFEwcXFlBxOJIQnlROOZja0RZeY2ANeQ9xc31fBV9hCgi49y1cSvUJxuFKtHGrLwxNrcwCV2eR-VtxnV2jHdCeXAyG1kUTxMSSGgvXV-1MWXPV1z6dqIpgUo9uR8L2IS16vZ8vdqZHnhAm-Jv6ScdiGGh40e-f5hkrCwl8nlHiQuBdDHukDkdyFIZ_5Gr3jncoMaiFhzt7Jgk5OQOv5NM7oyQeIJy33i0IZ9EMdDK8Y5qgOKjY9UxD4UAiBqN6ShkdWIimks4tKyqWPLVLVJX9NXvcBBVpewoqe6eDdHMNgxtJ5tTg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/client/myDealer/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"client",
+								"myDealer",
+								"4"
 							]
 						}
 					},
@@ -323,16 +303,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc3MzgyMDAsImlhdCI6MTYzNzczNzkwMCwianRpIjoiMDNmY2VhZWMtNmFmNi00NDNlLWFjZTMtYjljNzMwODE1ZWQyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4YTg1OTczNi0yNDI3LTRkZWItOWZlNy1jNjA4NDJjMzdiZGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6IjRmZTJhYjUzLTFlYjItNGMwYS1hNWRlLTk2MGRiYmQ2NzgzYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJQUk9EVUNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1saW1lLXNob3AiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjRmZTJhYjUzLTFlYjItNGMwYS1hNWRlLTk2MGRiYmQ2NzgzYiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdDEiLCJlbWFpbCI6ImVhaWxkMkB0ZXN0LnBsIn0.S0csHPG1R-8FRVWqfw-bmyN2JgkJiIiNh3VrWFT6h0YsYqi1DEwPc21LlD3OUeHMepwktHDHS_1cRtdnLfVs1W37vixQBODprmzCsi9zR5dQwoPe14lI936AyeAQKsuwhyEvG3rK0lCvVLET7UKzw-vB7dsggl_gRPNKH4s5wcaWy6odKDrobKzqoeSAYVi5cpyPHdugHvOyYGUo8oUW5p-Otr-Mwsr-rsJm5LptrPfWVRLGaYH_88svKhzMZHN490qXlWllitjhWS3nSZmd7Da7DNHGfM9xGhgdN8YJnK1ik1-gU5Kmd5s_BAHQFaex_I9T5WvrpKC418b-RTI5lg",
 									"type": "string"
 								}
 							]
@@ -347,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -355,16 +330,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/cielnt/myDealer/{id}",
+							"raw": "http://localhost:8081/client/myDealer/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"cielnt",
+								"client",
 								"myDealer",
-								"{id}"
+								"5"
 							]
 						}
 					},
@@ -429,95 +404,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/cielnt/orders",
+							"raw": "http://localhost:8081/cielnt",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"cielnt",
-								"orders"
+								"cielnt"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Take order History for client",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"new post\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"check content msg\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
-									"    pm.expect(jsonData.done).to.eql(false);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/cielnt/orderHistory",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"cielnt",
-								"orderHistory"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get order",
+					"name": "make order",
 					"event": [
 						{
 							"listen": "test",
@@ -540,16 +441,11 @@
 					],
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc3NDUzNjksImlhdCI6MTYzNzc0NTA2OSwianRpIjoiMmExMGRjYzUtMDdhYy00NmM1LWE5ZjgtMWM2YjIyZDUwMDYwIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4YTg1OTczNi0yNDI3LTRkZWItOWZlNy1jNjA4NDJjMzdiZGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImE4M2VlMDBlLWIzMDctNDgxYS05NjhhLWZkMmUyNzQyZGIyYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJQUk9EVUNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1saW1lLXNob3AiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImE4M2VlMDBlLWIzMDctNDgxYS05NjhhLWZkMmUyNzQyZGIyYiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdDEiLCJlbWFpbCI6ImVhaWxkMkB0ZXN0LnBsIn0.dhx0Uv2fYkbX7yj4JKqmeqa7DdSYa2eX9ohDqDfXbj_UzesYjTKrKSvZjmPqeFHDtrWZHFsAmXUR1XxgdX_17FldDSjZSZQ6i-WrA9o364wQHW4Vs8dmbzewj7-eICwqTusH1eyG7sYSUHXWnQ-_YHLdHXIYNacCr_A0T5Znk1TskRSf7s7tFWrOqMTOQdaLEAxP7xR6Q2BFjxqLgAg6ouzP7wVVtefEEQlzO5gakhw-YeIYrYXH9rgGWK5sRhKw-hB4dlbqDT9gtDbqBj9FQyPBSsK8vzZWrz7UdIYhgdmxCFpfDyGa3-q3wlScpF-f-55wHCxK4c22P1jykbL_bA",
 									"type": "string"
 								}
 							]
@@ -564,7 +460,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"limeId\" : 1,\r\n    \"amount\" : 88, \r\n    \"dateOfReceipt\": \"2022-11-09T11:45:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -572,16 +468,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/myDealer/{id}/{limeId}",
+							"raw": "http://localhost:8081/client/myDealer/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
+								"client",
 								"myDealer",
-								"{id}",
-								"{limeId}"
+								"5"
 							]
 						}
 					},
@@ -635,7 +531,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"dayOfPickup\" : \"2021-10-11T16:00:00+02:00\",\r\n    \"amount\" : 4\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -643,16 +539,83 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/cielnt/orders/{id}",
+							"raw": "http://localhost:8081/client/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"cielnt",
-								"orders",
-								"{id}"
+								"client",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Take order History for client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"new post\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"check content msg\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
+									"    pm.expect(jsonData.done).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2Mzc3NTA1MjksImlhdCI6MTYzNzc1MDIyOSwianRpIjoiOGY2OTQzMzgtNjk4OC00YWU1LThmYjUtYmZiYjExZDVkY2E1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4YTg1OTczNi0yNDI3LTRkZWItOWZlNy1jNjA4NDJjMzdiZGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImIwOTM2NDVlLTdlM2ItNDczNi05NGVmLWQ3YTMzNTg2ZjE5MiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJQUk9EVUNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1saW1lLXNob3AiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImIwOTM2NDVlLTdlM2ItNDczNi05NGVmLWQ3YTMzNTg2ZjE5MiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdDEiLCJlbWFpbCI6ImVhaWxkMkB0ZXN0LnBsIn0.IAHr-2XbEIM7asI-eWoU1l4KsodYZ4lpG_v_aGMyL2Cu0RkXblEnTVtA0MzqBkDpXXv2FCnDyrWmKXWj7uDw55qyBHWSheOaZ_jzPlAzNL7rC9nG9URIb8xE6GAIoXW86PGA304XBN5WOZLujks5y_M6yaotnf4BDTjsmvgkWPCxZVqpGal7CTR1X5soXdIH-ZLep8LW70dVOxvedcrukai2fvWAvnLmTwJ4C3m1jbL5EImVcDyoy52yHI15q54Bfa0FeaqFtBVTT-5N6Iu4qRGi2IRNS2W9DjH7fzIEtXPJXutmSLT4q2178vnHR-yrIP0zlOTYUtReFZzQ-7GAfw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/client/ordersHistory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"client",
+								"ordersHistory"
 							]
 						}
 					},
@@ -722,15 +685,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/producent/Clients",
+							"raw": "http://localhost:8081/producer/client",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
-								"producent",
-								"Clients"
+								"producer",
+								"client"
 							]
 						}
 					},
@@ -763,16 +726,11 @@
 					},
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2MzcwNDU5NzIsImlhdCI6MTYzNzA0NTY3MiwianRpIjoiNWI2OTgzYTktMGZkNS00YzU0LWEyYzItNTU3ZDA0NjIwZTdjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4YTg1OTczNi0yNDI3LTRkZWItOWZlNy1jNjA4NDJjMzdiZGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImQ0Y2Y4MjEyLTFkY2QtNDY5OS1iMzIxLWVlNTg0MjE2NzIzZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJQUk9EVUNFUiIsIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1saW1lLXNob3AiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImQ0Y2Y4MjEyLTFkY2QtNDY5OS1iMzIxLWVlNTg0MjE2NzIzZCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdDEiLCJlbWFpbCI6ImVhaWxkMkB0ZXN0LnBsIn0.TQf_pUhHrQFeOuSX3hyWh1INGuC5jhIauEWNcZp9z3IdzhefY4DvSobNHF5khrpZvxhXf42SP03h3na0D1FFv2H9h-i8vH1cuSgqLyHmjXCR-8vZu12m-sC110YMOepqFLGV2U_fIrfO3kUq8Zb8XrlUKjay6xuZDr0IJkzkT6rOqni7woPQXyyn0wuFFqzTbwOjet2LyqIOA3bFpHIz_Sy0BOSMYEmvu0PYabkgevhBD7eoxW6lFSgl8_c7BsFAsVnen_uJpJ-ctznujMC0TFVK_q2nm7WL_PFBDG8A4CtZI9QbYVA8w90qO-sq3upkfh1kZVVZfl6WSVp-Ngv_qA",
 									"type": "string"
 								}
 							]
@@ -787,7 +745,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -795,14 +753,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/resource",
+							"raw": "http://localhost:8081/producer/resource",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"resource"
 							]
 						}
@@ -865,14 +823,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/resource",
+							"raw": "http://localhost:8081/producer/resource",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"resource"
 							]
 						}
@@ -927,7 +885,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"done\": false,\r\n    \"description\" : \"TEST PUT\"\r\n\r\n    \r\n}",
+							"raw": "\r\n{\r\n    \"amount\": 76,\r\n    \"type\" : \"test\"\r\n\r\n}\r\n\r\n    \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -935,23 +893,23 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/resource/100",
+							"raw": "http://localhost:8081/producer/resource/{id}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"resource",
-								"100"
+								"{id}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "show order waiting to accept",
+					"name": "delete lime",
 					"event": [
 						{
 							"listen": "test",
@@ -972,9 +930,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "basic",
@@ -991,7 +946,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1001,7 +956,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "\r\n{\r\n    \"amount\": 76,\r\n    \"type\" : \"test\"\r\n\r\n}\r\n\r\n    \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1009,85 +964,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/wait",
+							"raw": "http://localhost:8081/producer/resource/{id}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
-								"wait"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update order status",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"new post\", function () {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"\r",
-									"pm.test(\"check content msg\", function () {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
-									"    pm.expect(jsonData.done).to.eql(false);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "prof@wp.pl",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "1234",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8081/producent/wait/{id}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8081",
-							"path": [
-								"producent",
-								"wait",
+								"producer",
+								"resource",
 								"{id}"
 							]
 						}
@@ -1153,15 +1038,158 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/order",
+							"raw": "http://localhost:8081/producer",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show order waiting to accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"new post\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"check content msg\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
+									"    pm.expect(jsonData.done).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "prof@wp.pl",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/producer/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producer",
 								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update order status to accept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"new post\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"check content msg\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.description).to.eql(\"TEST PUT\");\r",
+									"    pm.expect(jsonData.done).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "prof@wp.pl",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/producer/order/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producer",
+								"order",
+								"{id}"
 							]
 						}
 					},
@@ -1223,14 +1251,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/order/{id}",
+							"raw": "http://localhost:8081/producer/order/{id}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"order",
 								"{id}"
 							]
@@ -1294,14 +1322,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/order/{id}",
+							"raw": "http://localhost:8081/producer/order/{id}",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"order",
 								"{id}"
 							]
@@ -1368,14 +1396,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8081/producent/orderHistory",
+							"raw": "http://localhost:8081/producer/orderHistory",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"producent",
+								"producer",
 								"orderHistory"
 							]
 						}
@@ -1392,6 +1420,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"test6\",\r\n    \"password\" : \"test6\",\r\n    \"name\" : \"Miki\",\r\n    \"lastName\" : \"lastName\",\r\n    \"phoneNumber\" : \"102211460\",\r\n    \"email\" : \"ea11@Test.pl\",\r\n    \"city\" : \"Cieśle\",\r\n    \"street\":  \"-\",\r\n    \"houseNumber\" : \"1a\",\r\n    \"roleName\" : \"client\",\r\n    \"postCode\" : \"98-335\"\r\n\r\n\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8081/register",
 							"protocol": "http",
@@ -1412,14 +1449,52 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8081/",
+							"raw": "http://localhost:8081/profile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								""
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get main panel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleete profile",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"profile"
 							]
 						}
 					},
@@ -1427,18 +1502,122 @@
 				},
 				{
 					"name": "get  access token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "Lime-Shop-app",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "b7525549-e6d5-4069-b9d1-95ee7595caa5",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
 						"url": {
-							"raw": "http://localhost:8081/token",
+							"raw": "http://localhost:8081/auth",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8081",
 							"path": [
-								"token"
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "chang password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJJYTRFRF9kaFdBREtLMjU5Tl9abXlTdUZpeHFGZ3lsc0RKWXFDTWk0eGMwIn0.eyJleHAiOjE2MzY1NTExMDYsImlhdCI6MTYzNjU1MDgwNiwianRpIjoiNWYxMTY0OWQtYzNlOS00ZDU3LTllYWEtOGU3OGEwMGUyYjFjIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL0xpbWUtU2hvcCIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4YTg1OTczNi0yNDI3LTRkZWItOWZlNy1jNjA4NDJjMzdiZGQiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJMaW1lLVNob3AtYXBwIiwic2Vzc2lvbl9zdGF0ZSI6ImEyNjU1YjExLWUyNDQtNGRiZS05MTYxLWM4NzVhOWY0MmNjMiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cDovL2xvY2FsaG9zdDo4MDgxIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImRlZmF1bHQtcm9sZXMtbGltZS1zaG9wIiwidW1hX2F1dGhvcml6YXRpb24iLCJDTElFTlQiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJhMjY1NWIxMS1lMjQ0LTRkYmUtOTE2MS1jODc1YTlmNDJjYzIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InRlc3QxIiwiZW1haWwiOiJlYWlsZDJAdGVzdC5wbCJ9.itmpdar0beXpAQAGeHfBcL0OZuBE475F3CiYSEMXUajvwU8bDMEsvLnocAB2OiE2iQ6uiXhLJEEtdmg1kXWGLkIacmdoOz1EAXZZ2UrACzV-ylnjDcdmAlIYFfP4B3eWibZ_5aKIz2gL53MuP2mgWhZ1cfPiTCJscko_DFfhYMUN7s6m597e8CUv34PRLJTz087hIXTg5dIH3vG5dAmHw1baZxbizXfwBS3WcN4ccJhqrHXds7gAlYf-CB9GlZOsQ-DjPwibxIQOSSHeuftYeSB8HTqMD2lZD7kU6-gx4fovla6eFxbmXHvGCx0hNqm0jusnal5OcQGByB65ceTI_w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "Lime-Shop-app",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "test1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "b7525549-e6d5-4069-b9d1-95ee7595caa5",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"profile"
 							]
 						}
 					},

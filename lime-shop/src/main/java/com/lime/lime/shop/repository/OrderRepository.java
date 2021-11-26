@@ -31,4 +31,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity,Long> {
     @Query("from OrderEntity o where o.status.statusName <> 'CANCELED' and (o.client.id = :id or o.producer.id =:id)")
     List<OrderEntity> getOrderWithUserById(@Param("id") Long userId);
 
+    @Query("from OrderEntity o where o.producer.id = :id or o.client.id = :id")
+    List<OrderEntity> getAllTransactionWithClient(@Param("id")Long userId);
 }

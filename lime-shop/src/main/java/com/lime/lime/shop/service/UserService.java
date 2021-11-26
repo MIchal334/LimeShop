@@ -93,18 +93,25 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUser() {
-        UserEntity currentUser = handleCurrentUser();
-        addressService.deleteAddressByUserId(currentUser.getId());
-        orderService.deleteAllByUerId(currentUser.getId());
-        deleteClientProducerRelationByUserId(currentUser.getId());
+    public void deleteUser(Optional<UserEntity> user) {
+        UserEntity userToDelete = new UserEntity();
 
-        if (currentUser.getRole().getRoleName().equals(RoleType.PRODUCER.name())) {
-            limeService.deleteAllByUserId(currentUser.getId());
+        if(user.isEmpty()){
+            userToDelete = handleCurrentUser();
+        }else{
+            userToDelete = user.get();
         }
 
-        keycloakService.setDisabled(currentUser.getUsername());
-        currentUser.setDeleted(true);
+        addressService.deleteAddressByUserId(userToDelete.getId());
+        orderService.deleteAllByUerId(userToDelete.getId());
+        deleteClientProducerRelationByUserId(userToDelete.getId());
+
+        if (userToDelete.getRole().getRoleName().equals(RoleType.PRODUCER.name())) {
+            limeService.deleteAllByUserId(userToDelete.getId());
+        }
+
+        keycloakService.setDisabled(userToDelete.getUsername());
+        userToDelete.setDeleted(true);
     }
 
 
@@ -162,6 +169,7 @@ public class UserService {
                    r.setDeleted(true);
                });
     }
+
 
 
 }

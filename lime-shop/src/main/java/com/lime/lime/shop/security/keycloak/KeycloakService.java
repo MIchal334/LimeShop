@@ -24,7 +24,7 @@ public class KeycloakService {
 
     public void creteNewUser(UserDTO userData){
         UserRepresentation newUser = new UserRepresentation();
-        UsersResource usersResource = KeycloakConfig.getInstance().realm(KeycloakConfig.realm).users();
+        UsersResource usersResource = KeycloakConfig.getInstance().realm(KeycloakDataSource.realm).users();
         CredentialRepresentation credentialRepresentation = createPasswordCredentials(userData.getPassword());
 
         newUser.setUsername(userData.getUsername());
@@ -56,7 +56,7 @@ public class KeycloakService {
     public String findUserNameByUserId(String id) {
         return KeycloakConfig
                 .getInstance()
-                .realm(KeycloakConfig.realm)
+                .realm(KeycloakDataSource.realm)
                 .users()
                 .get(id)
                 .toRepresentation()
@@ -104,7 +104,7 @@ public class KeycloakService {
         role.add(
                 KeycloakConfig
                         .getInstance()
-                        .realm(KeycloakConfig.realm)
+                        .realm(KeycloakDataSource.realm)
                         .roles()
                         .get(user.getRoleName())
                         .toRepresentation()
@@ -117,7 +117,7 @@ public class KeycloakService {
     private UserResource getUserResource(String userId) {
         UserResource usersResourceToAddRole = KeycloakConfig
                 .getInstance()
-                .realm(KeycloakConfig.realm)
+                .realm(KeycloakDataSource.realm)
                 .users()
                 .get(userId);
         return usersResourceToAddRole;
@@ -126,7 +126,7 @@ public class KeycloakService {
     private String findUserIdByUserName(String user) {
         return KeycloakConfig
                 .getInstance()
-                .realm(KeycloakConfig.realm)
+                .realm(KeycloakDataSource.realm)
                 .users()
                 .search(user)
                 .get(0)

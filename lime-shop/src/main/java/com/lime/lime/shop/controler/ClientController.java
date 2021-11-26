@@ -9,12 +9,15 @@ import com.lime.lime.shop.service.ClientService;
 import com.lime.lime.shop.service.ProducerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
 @RequestMapping("/client")
+@RolesAllowed("ROLE_CLIENT")
 public class ClientController {
 
     private final ClientService clientService;

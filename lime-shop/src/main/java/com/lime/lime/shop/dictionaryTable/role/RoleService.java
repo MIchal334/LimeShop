@@ -1,6 +1,7 @@
 package com.lime.lime.shop.dictionaryTable.role;
 
 import com.lime.lime.shop.security.keycloak.KeycloakConfig;
+import com.lime.lime.shop.security.keycloak.KeycloakDataSource;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,7 @@ public class RoleService {
         for (RoleEntity role : roleRepository.findAll()) {
             roleRepresentations.add(KeycloakConfig
                     .getInstance()
-                    .realm(KeycloakConfig.realm)
+                    .realm(KeycloakDataSource.realm)
                     .roles()
                     .get(role.getRoleName())
                     .toRepresentation());

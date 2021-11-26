@@ -6,6 +6,7 @@ import com.lime.lime.shop.model.modelForRestClient.ResponseModel;
 import com.lime.lime.shop.model.entity.AddressEntity;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.repository.AddressRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +15,9 @@ import java.util.Arrays;
 @Service
 public class AddressService {
 
-    private final String apiKye = "6E-MqWwkVrVCCYnKuzrZI44lovTIyN-YBhm6rwdTqnU";
+    @Value("${apiKey.geo}")
+    private String apiKye;
+
     private final AddressRepository addressRepository;
 
     public AddressService(AddressRepository addressRepository) {

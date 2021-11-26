@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 
 
 @RestController
@@ -50,7 +51,7 @@ public class UserController {
 
     @DeleteMapping("/profile")
     public ResponseEntity<?> deleteProfile(){
-        userService.deleteUser();
+        userService.deleteUser(Optional.empty());
         return ResponseEntity.ok().build();
     }
 

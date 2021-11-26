@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/lime?serverTimezone=Europe/Budapest
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+apiKey:
+  geo: "6E-MqWwkVrVCCYnKuzrZI44lovTIyN-YBhm6rwdTqnU"
+
+keycloak:
+  auth-server-url: "http://localhost:8080/auth"
+  resource: "Lime-Shop-app"
+  realm: "Lime-Shop"
+  credentials:
+    secret: "05d473ca-457c-439a-bf8e-0eed540aa3cc"
+  cors: true
+  enabled: true
