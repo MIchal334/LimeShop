@@ -1,6 +1,7 @@
 package com.lime.lime.shop.model.entity;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.model.dto.UserDTO;
+import org.jboss.resteasy.spi.touri.MappedBy;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class UserEntity {
 
     @Column(name = "email")
     private String email;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address", referencedColumnName = "id")

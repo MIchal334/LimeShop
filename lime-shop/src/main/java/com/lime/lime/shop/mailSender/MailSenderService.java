@@ -42,7 +42,7 @@ public class MailSenderService {
     public void sendEmailToClientAboutChangeOrderStatus(OrderEntity order) throws MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper mail = new MimeMessageHelper(message, true);
-        mail.setTo(order.getProducer().getEmail());
+        mail.setTo(order.getClient().getEmail());
         mail.setFrom(new InternetAddress("LimeTransaction@outlook.com", false));
 
         mail.setSubject("Change Order status");

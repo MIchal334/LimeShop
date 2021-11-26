@@ -22,6 +22,7 @@ public class LimeEntity {
     private Boolean isDeleted;
 
     @ManyToOne
+    @MapsId
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 

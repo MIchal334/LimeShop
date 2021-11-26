@@ -17,7 +17,6 @@ public class MailSenderConfig {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp-mail.outlook.com");
         mailSender.setPort(587);
-
         mailSender.setUsername("LimeTransaction@outlook.com");
         mailSender.setPassword("LimeShop");
 
@@ -28,7 +27,7 @@ public class MailSenderConfig {
         props.put("mail.smtp.starttls.required","true");
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.ssl.trust", "*");
-        props.put("mail.debug", "true");
+        props.put("mail.debug", "false");
         return mailSender;
     }
 }
