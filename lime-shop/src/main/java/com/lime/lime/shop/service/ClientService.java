@@ -135,13 +135,13 @@ public class ClientService {
     }
 
 
-    public float computeDistance(AddressEntity clientAddress, AddressEntity producerAddress) {
+    private float computeDistance(AddressEntity clientAddress, AddressEntity producerAddress) {
         float distance;
         float earthRadius = 6371;
-        float clientLon = clientAddress.getLon();
-        float clientLat = clientAddress.getLat();
-        float producerLon = producerAddress.getLon();
-        float producerLat = producerAddress.getLat();
+        float clientLon = (float) (clientAddress.getLon() * Math.PI/180);
+        float clientLat = (float) (clientAddress.getLat() * Math.PI/180);
+        float producerLon = (float) (producerAddress.getLon() * Math.PI/180);
+        float producerLat = (float) (producerAddress.getLat() * Math.PI/180);
 
 
         float x = (float) ((producerLon - clientLon) * Math.cos((producerLat + clientLat) / 2));
