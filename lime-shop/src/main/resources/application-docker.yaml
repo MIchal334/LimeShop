@@ -16,5 +16,6 @@ keycloak:
   enabled: true
 
 
+
 apiKey:
   geo: ${apiKeyGeo}

@@ -16,3 +16,4 @@ keycloak:
     secret: "05d473ca-457c-439a-bf8e-0eed540aa3cc"
   cors: true
   enabled: true
+
