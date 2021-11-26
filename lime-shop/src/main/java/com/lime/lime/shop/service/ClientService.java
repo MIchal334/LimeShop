@@ -5,6 +5,7 @@ import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusRepository;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
+import com.lime.lime.shop.mailSender.MailSenderService;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.OrderWriteModel;
@@ -14,10 +15,10 @@ import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.ClientProducerRepository;
-import com.lime.lime.shop.repository.OrderRepository;
-import org.springframework.core.annotation.Order;
+
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,14 +31,16 @@ public class ClientService {
     private final LimeService limeService;
     private final OrderStatusRepository orderStatusRepository;
     private final OrderService orderService;
+    private final MailSenderService mailSender;
 
 
-    public ClientService(UserService userService, ClientProducerRepository clientProducerRepository, LimeService limeService, OrderStatusRepository orderStatusRepository, OrderService orderService) {
+    public ClientService(UserService userService, ClientProducerRepository clientProducerRepository, LimeService limeService, OrderStatusRepository orderStatusRepository, OrderService orderService, MailSenderService mailSender) {
         this.userService = userService;
         this.clientProducerRepository = clientProducerRepository;
         this.limeService = limeService;
         this.orderStatusRepository = orderStatusRepository;
         this.orderService = orderService;
+        this.mailSender = mailSender;
     }
 
 
@@ -100,7 +103,7 @@ public class ClientService {
 
     }
 
-    public void getNewOrder(Long producerId, OrderWriteModel order) {
+    public void makeNewOrder(Long producerId, OrderWriteModel order)  {
         UserEntity currentUser = userService.handleCurrentUser();
         getClientProducerRelation(currentUser.getId(), producerId);
         UserEntity producer = userService.getUserByIdAndRole(producerId, RoleType.PRODUCER);
@@ -108,6 +111,12 @@ public class ClientService {
 
         OrderStatusEntity orderStatus = orderStatusRepository.getOrderStatusByName(OrderStatusType.WAITING.name());
         OrderEntity orderToSave = new OrderEntity(order, currentUser, producer, lime, orderStatus);
+
+        try {
+            mailSender.sendEmailToProducerAboutNewOrder(orderToSave);
+        }catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         orderService.save(orderToSave);
 

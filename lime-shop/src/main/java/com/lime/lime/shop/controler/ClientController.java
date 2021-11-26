@@ -1,15 +1,12 @@
 package com.lime.lime.shop.controler;
 
-import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.OrderWriteModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.service.ClientService;
-import com.lime.lime.shop.service.ProducerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
@@ -59,8 +56,8 @@ public class ClientController {
 
 
     @PostMapping("/myDealer/{id}")
-    ResponseEntity<?> getNewOrder(@PathVariable(name = "id") Long producerId, @RequestBody OrderWriteModel order) {
-        clientService.getNewOrder(producerId, order);
+    ResponseEntity<?> makeNewOrder(@PathVariable(name = "id") Long producerId, @RequestBody OrderWriteModel order) {
+        clientService.makeNewOrder(producerId, order);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.mail.MessagingException;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.NotAuthorizedException;
 
@@ -48,4 +49,10 @@ public class ExceptionHandlerController {
     ResponseEntity<Object> handlerWrongFormatException(WrongFormatException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+
+    @ExceptionHandler(MessagingException.class)
+    ResponseEntity<Object> errorWithMailSender(MessagingException e) {
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body("Problem with sending email");
+    }
+
 }

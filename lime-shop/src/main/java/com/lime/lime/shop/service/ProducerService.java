@@ -1,9 +1,9 @@
 package com.lime.lime.shop.service;
 
-import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusRepository;
 import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusType;
 import com.lime.lime.shop.dictionaryTable.role.RoleType;
+import com.lime.lime.shop.mailSender.MailSenderService;
 import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.UserDTO;
@@ -12,6 +12,7 @@ import com.lime.lime.shop.model.entity.UserEntity;
 import com.lime.lime.shop.repository.ClientProducerRepository;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 import java.util.Comparator;
 import java.util.List;
@@ -25,14 +26,16 @@ public class ProducerService {
     private final ClientProducerRepository clientProducerRepository;
     private final LimeService limeService;
     private final OrderStatusRepository orderStatusRepository;
+    private final MailSenderService mailSender;
 
 
-    public ProducerService(UserService userService, OrderService orderService, ClientProducerRepository clientProducerRepository, LimeService limeService, OrderStatusRepository orderStatusRepository) {
+    public ProducerService(UserService userService, OrderService orderService, ClientProducerRepository clientProducerRepository, LimeService limeService, OrderStatusRepository orderStatusRepository, MailSenderService mailSender) {
         this.userService = userService;
         this.orderService = orderService;
         this.clientProducerRepository = clientProducerRepository;
         this.limeService = limeService;
         this.orderStatusRepository = orderStatusRepository;
+        this.mailSender = mailSender;
     }
 
 
@@ -93,6 +96,12 @@ public class ProducerService {
         UserEntity user = userService.handleCurrentUser();
         OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(), orderId, changeToStatus,RoleType.PRODUCER);
         order.setStatus(orderStatusRepository.getOrderStatusByName(changeToStatus.name()));
+
+        try {
+            mailSender.sendEmailToClientAboutChangeOrderStatus(order);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
         orderService.save(order);
     }
 
