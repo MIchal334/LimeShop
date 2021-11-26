@@ -13,6 +13,7 @@ import com.lime.lime.shop.repository.ClientProducerRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,7 @@ public class ProducerService {
         List<OrderReadModel> orderList = orderService.getOrderListByStatusAndUserId(statusType, user.getId())
                 .stream()
                 .map(x -> new OrderReadModel(x.getClient(),x.getLime(),x))
+                .sorted(Comparator.comparing(OrderReadModel::getDateOfReceipt))
                 .collect(Collectors.toList());
 
         return orderList;

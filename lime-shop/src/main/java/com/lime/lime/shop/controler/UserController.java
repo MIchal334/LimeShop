@@ -1,8 +1,10 @@
 package com.lime.lime.shop.controler;
 
 import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.AddressEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
 
+import com.lime.lime.shop.service.ClientService;
 import com.lime.lime.shop.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,13 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final ClientService clientService;
 
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ClientService clientService) {
         this.userService = userService;
 
+        this.clientService = clientService;
     }
 
     @GetMapping("/profile")

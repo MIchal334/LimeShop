@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,6 +78,7 @@ public class OrderService {
                 .findAllHistoryOrdersByUserId(LocalDateTime.now(), user.getId())
                 .stream()
                 .map(o -> new OrderReadModel(getUserFromOrder(roleType, o), o.getLime(), o))
+                .sorted(Comparator.comparing(OrderReadModel::getDateOfReceipt))
                 .collect(Collectors.toList());
     }
 

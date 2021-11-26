@@ -9,6 +9,7 @@ import com.lime.lime.shop.model.dto.LimeDTO;
 import com.lime.lime.shop.model.dto.OrderReadModel;
 import com.lime.lime.shop.model.dto.OrderWriteModel;
 import com.lime.lime.shop.model.dto.UserDTO;
+import com.lime.lime.shop.model.entity.AddressEntity;
 import com.lime.lime.shop.model.entity.LimeEntity;
 import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
@@ -17,6 +18,7 @@ import com.lime.lime.shop.repository.OrderRepository;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,17 +48,21 @@ public class ClientService {
                 .stream()
                 .filter(o -> !o.isDeleted())
                 .filter(o -> producersAssignToUser.contains(o.getId()))
+                .sorted(Comparator.comparing(o -> computeDistance(user.getAddress(), o.getAddress())))
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
 
     public List<UserDTO> getAllProducer() {
+        UserEntity currentUser = userService.handleCurrentUser();
         return userService.getAllUserByRoleName(RoleType.PRODUCER.name())
                 .stream()
                 .filter(o -> !o.isDeleted())
+                .sorted(Comparator.comparing(o -> computeDistance(currentUser.getAddress(), o.getAddress())))
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
+
 
     public void assignNewDealer(Long producerId) {
         UserEntity currentUser = userService.handleCurrentUser();
@@ -88,18 +94,20 @@ public class ClientService {
         List<OrderEntity> allOrderOfClient = orderService.getAcctuallyOrderForClient(user.getId());
         List<OrderReadModel> listOfOrder = allOrderOfClient.stream()
                 .map(o -> new OrderReadModel(user, o.getLime(), o))
+                .sorted(Comparator.comparing(OrderReadModel::getDateOfReceipt))
                 .collect(Collectors.toList());
         return listOfOrder;
+
     }
 
     public void getNewOrder(Long producerId, OrderWriteModel order) {
         UserEntity currentUser = userService.handleCurrentUser();
         getClientProducerRelation(currentUser.getId(), producerId);
         UserEntity producer = userService.getUserByIdAndRole(producerId, RoleType.PRODUCER);
-        LimeEntity lime = limeService.getNewOrder(order.getLimeId(),order.getAmount());
+        LimeEntity lime = limeService.getNewOrder(order.getLimeId(), order.getAmount());
 
         OrderStatusEntity orderStatus = orderStatusRepository.getOrderStatusByName(OrderStatusType.WAITING.name());
-        OrderEntity orderToSave = new OrderEntity(order, currentUser, producer, lime,orderStatus);
+        OrderEntity orderToSave = new OrderEntity(order, currentUser, producer, lime, orderStatus);
 
         orderService.save(orderToSave);
 
@@ -108,12 +116,12 @@ public class ClientService {
 
     public List<OrderReadModel> getAllOrderToHistory() {
         UserEntity user = userService.handleCurrentUser();
-        return orderService.getAllHistoryOrders(user,RoleType.CLIENT);
+        return orderService.getAllHistoryOrders(user, RoleType.CLIENT);
     }
 
     public void deleteOrderById(Long orderId) {
         UserEntity user = userService.handleCurrentUser();
-        OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(),orderId,OrderStatusType.CANCELED,RoleType.CLIENT);
+        OrderEntity order = orderService.prepareOrderToChangeStatus(user.getId(), orderId, OrderStatusType.CANCELED, RoleType.CLIENT);
         order.setStatus(orderStatusRepository.getOrderStatusByName(OrderStatusType.CANCELED.name()));
         orderService.save(order);
 
@@ -126,6 +134,22 @@ public class ClientService {
         return relation;
     }
 
+
+    public float computeDistance(AddressEntity clientAddress, AddressEntity producerAddress) {
+        float distance;
+        float earthRadius = 6371;
+        float clientLon = clientAddress.getLon();
+        float clientLat = clientAddress.getLat();
+        float producerLon = producerAddress.getLon();
+        float producerLat = producerAddress.getLat();
+
+
+        float x = (float) ((producerLon - clientLon) * Math.cos((producerLat + clientLat) / 2));
+        float y = (producerLat - clientLat);
+
+        distance = (float) (Math.sqrt(x * x + y * y) * earthRadius);
+        return distance;
+    }
 
 
 }
