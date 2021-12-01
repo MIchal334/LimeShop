@@ -47,4 +47,5 @@ public class AdministratorService {
                 .orElseThrow(() ->new ResourceNotExistsException("This user not exist"));
         userService.deleteUser(Optional.of(user));
     }
+
 }
