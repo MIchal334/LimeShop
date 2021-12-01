@@ -20,7 +20,8 @@ public class LimeDataValidator {
         this.limeRepository = limeRepository;
     }
 
-    public void validData(LimeDTO newLime, UserEntity user, Boolean isUpdate) {
+    public void validNewLimeData(LimeDTO newLime, UserEntity user, Boolean isUpdate) {
+
         amountValidation(newLime.getAmount());
 
         if(isUpdate){
@@ -32,6 +33,11 @@ public class LimeDataValidator {
 
     }
 
+    public void validNewOrder(LimeEntity lime, Long amountInOrder) {
+        amountValidation(amountInOrder);
+        checkIfTooMany(lime.getAmount(),amountInOrder);
+    }
+
     public void ownerValidation(Long limeId, Long userId) {
        List<LimeEntity> limesOfUser = limeRepository.getAllLimeByProducerId(userId);
 
@@ -40,11 +46,7 @@ public class LimeDataValidator {
        }
     }
 
-    public void validNewOrder(LimeEntity lime, Long amountInOrder) {
-        amountValidation(amountInOrder);
-        checkIfTooMany(lime.getAmount(),amountInOrder);
 
-    }
 
     private void typeValidation(String type, Long id) {
         Optional<LimeEntity> optionalOfLime = limeRepository.getLimeByTypeAndProducerId(type, id);

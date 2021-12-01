@@ -37,7 +37,7 @@ public class LimeService {
     }
 
     public void saveNewLime(LimeDTO newLime, UserEntity user){
-        limeDataValidator.validData(newLime, user, false);
+        limeDataValidator.validNewLimeData(newLime, user, false);
         LimeEntity limeToSave = new LimeEntity(newLime, user);
         limeRepository.save(limeToSave);
     }
@@ -47,7 +47,7 @@ public class LimeService {
         int oldAmount = lime.getAmount();
         lime.setAmount(newResource);
 
-        limeDataValidator.validData(new LimeDTO(lime), user, true);
+        limeDataValidator.validNewLimeData(new LimeDTO(lime), user, true);
         lime.setAmount(oldAmount + newResource);
         limeRepository.save(lime);
     }

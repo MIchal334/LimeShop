@@ -291,7 +291,7 @@ class UserDataValidatorTest {
 
 
     @Test
-    @DisplayName("should return IllegalArgumentException because ADMIN role is not available")
+    @DisplayName("should dose not throw any exception ")
     void validData_everything_is_ok_for_update_user() {
         var userRepositoryMock = mock(UserRepository.class);
         var roleRepositoryMock = mock(RoleRepository.class);
@@ -309,7 +309,7 @@ class UserDataValidatorTest {
 
 
     @Test
-    @DisplayName("should return IllegalArgumentException because role not exist")
+    @DisplayName("should dose not throw any exception ")
     void validData_everything_is_ok_for_create_user() {
         var userRepositoryMock = mock(UserRepository.class);
         var roleRepositoryMock = mock(RoleRepository.class);

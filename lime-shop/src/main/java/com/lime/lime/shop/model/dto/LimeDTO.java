@@ -33,4 +33,16 @@ public class LimeDTO {
     public Integer getAmount() {
         return amount;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
 }
