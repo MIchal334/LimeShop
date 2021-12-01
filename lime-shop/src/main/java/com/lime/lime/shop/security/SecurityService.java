@@ -22,6 +22,10 @@ public class SecurityService {
     @Value("${keycloak.credentials.secret}")
     private String client_secret;
 
+
+    @Value("${keycloak.auth-server-url}")
+    String keyCloakUrl;
+
     private final String grant_type = "password";
 
 
@@ -30,7 +34,7 @@ public class SecurityService {
         body.remove("newPassword");
         Map<String, String> mapWithToken = new HashMap<>();
         TokenModel response = new TokenModel();
-        String url = "http://localhost:8080/auth/realms/" + realmName + "/protocol/openid-connect/token";
+        String url = keyCloakUrl+"/realms/" + realmName + "/protocol/openid-connect/token";
         body.add("client_id", clientId);
         body.add("client_secret", client_secret);
         body.add("grant_type", grant_type);

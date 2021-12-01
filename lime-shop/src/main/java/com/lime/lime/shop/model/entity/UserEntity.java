@@ -144,4 +144,7 @@ public class UserEntity {
         return clientOrders;
     }
 
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
 }

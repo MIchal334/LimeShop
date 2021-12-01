@@ -27,4 +27,12 @@ public class RoleEntity {
     public String getRoleName() {
         return roleName;
     }
+
+    public void setId(Short id) {
+        this.id = id;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

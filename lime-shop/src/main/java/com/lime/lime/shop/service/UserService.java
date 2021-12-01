@@ -59,7 +59,6 @@ public class UserService {
 
 
     public UserEntity creteNewAccount(UserDTO newUser) {
-
         newUser.setRoleName(newUser.getRoleName().toUpperCase());
         userDataValidator.validData(newUser, Optional.empty());
 
