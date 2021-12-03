@@ -14,6 +14,7 @@ import java.util.List;
 @RolesAllowed("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdministratorController {
+
     private final AdministratorService adminService;
 
     public AdministratorController(AdministratorService adminService) {

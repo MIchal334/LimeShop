@@ -10,9 +10,12 @@ import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleService;
 import com.lime.lime.shop.repository.ClientProducerRepository;
 import com.lime.lime.shop.repository.UserRepository;
+import com.lime.lime.shop.security.interfaces.SecurityServiceInterface;
 import com.lime.lime.shop.security.keycloak.KeycloakService;
-import com.lime.lime.shop.security.SecurityService;
+import com.lime.lime.shop.service.serviceInterface.AddressServiceInterface;
 import com.lime.lime.shop.validators.UserDataValidator;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,17 +28,20 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    @Value("${keycloak.enabled}")
+    boolean isKeycloakActive;
+
     private final RoleService roleService;
     private final UserRepository userRepository;
-    private final AddressService addressService;
+    private final AddressServiceInterface addressService;
     private final UserDataValidator userDataValidator;
     private final KeycloakService keycloakService;
-    private final SecurityService securityService;
+    private final SecurityServiceInterface securityService;
     private final LimeService limeService;
     private final OrderService orderService;
     private final ClientProducerRepository clientProducerRepository;
 
-    public UserService(RoleService roleService, UserRepository userRepository, AddressService addressService, UserDataValidator userDataValidator, KeycloakService keycloakService, SecurityService securityService, LimeService limeService, OrderService orderService, ClientProducerRepository clientProducerRepository) {
+    public UserService(RoleService roleService, UserRepository userRepository, AddressServiceInterface addressService, UserDataValidator userDataValidator, KeycloakService keycloakService, SecurityServiceInterface securityService, LimeService limeService, OrderService orderService, ClientProducerRepository clientProducerRepository) {
         this.roleService = roleService;
         this.userRepository = userRepository;
         this.addressService = addressService;
@@ -49,10 +55,16 @@ public class UserService {
 
 
     public UserEntity handleCurrentUser() {
+        String username;
         Authentication auth = SecurityContextHolder.getContext()
                 .getAuthentication();
-        String keycloakId = auth.getName();
-        String username = keycloakService.findUserNameByUserId(keycloakId);
+        if(isKeycloakActive) {
+            String keycloakId = auth.getName();
+           username = keycloakService.findUserNameByUserId(keycloakId);
+        }else {
+            username =auth.getName();
+        }
+
         UserEntity currentUser = findUserByUserName(username);
         return currentUser;
     }
@@ -64,8 +76,11 @@ public class UserService {
 
         UserEntity userToAdd = prepareUserToCreate(newUser);
 
-        keycloakService.creteNewUser(newUser);
-        keycloakService.addRoleToUser(newUser);
+        if(isKeycloakActive){
+            keycloakService.creteNewUser(newUser);
+            keycloakService.addRoleToUser(newUser);
+        }
+
         UserEntity result = userRepository.save(userToAdd);
         return result;
     }
@@ -77,13 +92,17 @@ public class UserService {
         userDataValidator.validData(newUserData, Optional.of(currentUser));
         UserEntity userToUpdate = prepareUserToUpdate(currentUser, newUserData);
 
-        keycloakService.updateUser(newUserData, oldUsername);
-        keycloakService.addRoleToUser(newUserData);
+        if(isKeycloakActive) {
+            keycloakService.updateUser(newUserData, oldUsername);
+            keycloakService.addRoleToUser(newUserData);
+        }
+
         UserEntity result = userRepository.save(userToUpdate);
         return result;
 
     }
 
+    @Profile("!test")
     public void changePassword(MultiValueMap body) {
         String newPassword = String.valueOf(body.get("newPassword"));
         body.set("username", handleCurrentUser().getUsername());
@@ -130,6 +149,7 @@ public class UserService {
     }
 
     private UserEntity findUserByUserName(String username) {
+
         return userRepository.getUserByUsername(username)
                 .filter(user -> !user.isDeleted())
                 .orElseThrow(() -> new IllegalStateException("User not exist or is deleted"));

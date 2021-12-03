@@ -7,6 +7,7 @@ import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
+
 public class KeycloakService {
 
     private final RoleService roleService;

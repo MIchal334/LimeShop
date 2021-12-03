@@ -1,0 +1,21 @@
+spring:
+  flyway:
+    enabled: false
+
+  datasource:
+    url: jdbc:h2:mem:tetsDB
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+
+keycloak:
+  enabled: false
+
+
+apiKey:
+  geo: "null"

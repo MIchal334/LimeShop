@@ -6,14 +6,17 @@ import com.lime.lime.shop.model.modelForRestClient.ResponseModel;
 import com.lime.lime.shop.model.entity.AddressEntity;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.repository.AddressRepository;
+import com.lime.lime.shop.service.serviceInterface.AddressServiceInterface;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
 @Service
-public class AddressService {
+@Profile("!test")
+public class AddressService implements AddressServiceInterface {
 
     @Value("${apiKey.geo}")
     private String apiKye;
@@ -28,6 +31,7 @@ public class AddressService {
         AddressEntity addressToDelete = addressRepository.getAddressByUserId(id);
         addressToDelete.setDeleted(true);
     }
+
 
 
     public Position getLatAndLon(UserDTO userData) {

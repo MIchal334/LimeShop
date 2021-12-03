@@ -1,7 +1,9 @@
 package com.lime.lime.shop.security;
 
 import com.lime.lime.shop.model.entity.TokenModel;
+import com.lime.lime.shop.security.interfaces.SecurityServiceInterface;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
@@ -11,7 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class SecurityService {
+@Profile({"!test"})
+public class SecurityService implements SecurityServiceInterface {
+
+
+
     @Value("${keycloak.resource}")
     private String clientId;
 
@@ -26,6 +32,7 @@ public class SecurityService {
     @Value("${keycloak.auth-server-url}")
     String keyCloakUrl;
 
+
     private final String grant_type = "password";
 
 
@@ -34,7 +41,7 @@ public class SecurityService {
         body.remove("newPassword");
         Map<String, String> mapWithToken = new HashMap<>();
         TokenModel response = new TokenModel();
-        String url = keyCloakUrl+"/realms/" + realmName + "/protocol/openid-connect/token";
+        String url = keyCloakUrl + "/realms/" + realmName + "/protocol/openid-connect/token";
         body.add("client_id", clientId);
         body.add("client_secret", client_secret);
         body.add("grant_type", grant_type);
