@@ -1,15 +1,23 @@
 package com.lime.lime.shop;
 
+import com.lime.lime.shop.dictionaryTable.orderStatus.OrderStatusEntity;
 import com.lime.lime.shop.dictionaryTable.role.RoleEntity;
+import com.lime.lime.shop.model.dto.LimeDTO;
+import com.lime.lime.shop.model.dto.OrderWriteModel;
 import com.lime.lime.shop.model.dto.UserDTO;
 import com.lime.lime.shop.model.entity.AddressEntity;
+import com.lime.lime.shop.model.entity.LimeEntity;
+import com.lime.lime.shop.model.entity.OrderEntity;
 import com.lime.lime.shop.model.entity.UserEntity;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 public class MockObjects {
 
-    public UserDTO mockUserDTO(String phoneNumber, String email, String roleName,String username) {
+    public UserDTO mockUserDTO(String phoneNumber, String email, String roleName, String username) {
         UserDTO mockUser = new UserDTO();
         mockUser.setName("name");
         mockUser.setUsername(username);
@@ -35,11 +43,11 @@ public class MockObjects {
     public RoleEntity mockRoleEntity(String roleName) {
         RoleEntity mockRole = new RoleEntity();
         mockRole.setRoleName(roleName);
-        mockRole.setId((short)2);
+        mockRole.setId((short) 2);
         return mockRole;
     }
 
-    public AddressEntity mockAddressEntity(){
+    public AddressEntity mockAddressEntity() {
         AddressEntity addressEntity = new AddressEntity();
         addressEntity.setCity("Miasto");
         addressEntity.setDeleted(false);
@@ -48,7 +56,5 @@ public class MockObjects {
         addressEntity.setStreet("ulica");
         return addressEntity;
     }
-
-
 }
 

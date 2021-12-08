@@ -81,6 +81,30 @@ public class OrderEntity {
         return status;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setProducer(UserEntity producer) {
+        this.producer = producer;
+    }
+
+    public void setClient(UserEntity client) {
+        this.client = client;
+    }
+
+    public void setLime(LimeEntity lime) {
+        this.lime = lime;
+    }
+
+    public void setAmount(Long amount) {
+        this.amount = amount;
+    }
+
+    public void setDateOfReceipt(LocalDateTime dateOfReceipt) {
+        this.dateOfReceipt = dateOfReceipt;
+    }
+
     public void setStatus(OrderStatusEntity status) {
         this.status = status;
     }

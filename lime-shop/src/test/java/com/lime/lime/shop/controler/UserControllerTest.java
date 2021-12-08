@@ -82,7 +82,7 @@ class UserControllerTest {
         h2Config.prepareDataBase();
         userRepository.deleteAll();
         userRepository.save(mockObjects.mockUserEntity("123", "a@wp.pl",
-                "CLIENT", "admin"));
+                "ADMIN", "admin"));
     }
 
     @Test

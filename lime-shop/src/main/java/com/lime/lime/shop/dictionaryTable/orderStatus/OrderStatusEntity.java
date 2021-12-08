@@ -38,4 +38,12 @@ public class OrderStatusEntity {
     public Set<OrderEntity> getOrders() {
         return orders;
     }
+
+    public void setId(Short id) {
+        this.id = id;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
 }

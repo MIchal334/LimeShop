@@ -70,4 +70,12 @@ public class LimeEntity {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
+    }
 }
