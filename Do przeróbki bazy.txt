@@ -1,9 +1,0 @@
-	- Zajęć się endpiontami clienta 
-	-Zrobić emaiSender
-	-Zrobić testy 
-	-Wystawić Dockera
-	
-
-	
-
-  
