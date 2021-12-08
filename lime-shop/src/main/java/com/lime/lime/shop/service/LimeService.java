@@ -24,6 +24,7 @@ public class LimeService {
 
 
     public List<LimeDTO> getAllLimeByProducerId(Long producerId){
+        List<LimeEntity> list = limeRepository.findAll();
         return limeRepository.getAllLimeByProducerId(producerId)
                 .stream()
                 .filter(x -> !x.isDeleted())

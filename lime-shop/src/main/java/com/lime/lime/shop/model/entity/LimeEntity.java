@@ -22,7 +22,6 @@ public class LimeEntity {
     private Boolean isDeleted;
 
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "owner_id")
     private UserEntity owner;
 
@@ -69,6 +68,14 @@ public class LimeEntity {
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public Set<OrderEntity> getOrdersWithLime() {
+        return ordersWithLime;
     }
 
     public void setType(String type) {
