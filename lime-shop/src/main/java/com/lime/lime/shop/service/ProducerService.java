@@ -63,7 +63,7 @@ public class ProducerService {
 
     }
 
-    public void updateAmountOfLime(Long limeId, Integer newResource) {
+    public void updateLime(Long limeId, LimeDTO newResource) {
         UserEntity user = userService.handleCurrentUser();
         limeService.updateLime(limeId,newResource,user);
     }

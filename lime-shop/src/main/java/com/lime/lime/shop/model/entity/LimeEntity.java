@@ -18,6 +18,9 @@ public class LimeEntity {
     @Column(name = "amount")
     private Integer amount;
 
+    @Column(name = "price")
+    private Integer price;
+
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
@@ -35,6 +38,7 @@ public class LimeEntity {
         this.owner = user;
         this.type = newLime.getType();
         this.amount = newLime.getAmount();
+        this.price = newLime.getPrice();
         this.isDeleted = false;
     }
 
@@ -84,5 +88,17 @@ public class LimeEntity {
 
     public void setOwner(UserEntity owner) {
         this.owner = owner;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setOrdersWithLime(Set<OrderEntity> ordersWithLime) {
+        this.ordersWithLime = ordersWithLime;
     }
 }

@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/client")
 @RolesAllowed("ROLE_CLIENT")
+@CrossOrigin
 public class ClientController {
 
     private final ClientService clientService;

@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RolesAllowed("ROLE_ADMIN")
 @RequestMapping("/admin")
+@CrossOrigin
 public class AdministratorController {
 
     private final AdministratorService adminService;

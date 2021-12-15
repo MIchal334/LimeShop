@@ -43,13 +43,15 @@ public class LimeService {
         limeRepository.save(limeToSave);
     }
 
-    public void updateLime(Long limeId, Integer newResource,UserEntity user){
+    public void updateLime(Long limeId, LimeDTO newResource,UserEntity user){
         LimeEntity lime = getLimeById(limeId);
         int oldAmount = lime.getAmount();
-        lime.setAmount(newResource);
+        lime.setAmount(newResource.getAmount());
+        lime.setPrice(newResource.getPrice());
 
         limeDataValidator.validNewLimeData(new LimeDTO(lime), user, true);
-        lime.setAmount(oldAmount + newResource);
+        lime.setAmount(oldAmount + newResource.getAmount());
+
         limeRepository.save(lime);
     }
 

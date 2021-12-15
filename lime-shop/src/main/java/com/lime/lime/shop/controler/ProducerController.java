@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/producer")
 @RolesAllowed("ROLE_PRODUCER")
+@CrossOrigin
 public class ProducerController {
 
    private final ProducerService producerService;
@@ -74,8 +75,8 @@ public class ProducerController {
     }
 
     @PatchMapping("/resource/{id}")
-    ResponseEntity<?> updateAmountOfLime(@PathVariable(name = "id") Long id ,@RequestBody LimeDTO newResource){
-        producerService.updateAmountOfLime(id,newResource.getAmount());
+    ResponseEntity<?> updateLime(@PathVariable(name = "id") Long id , @RequestBody LimeDTO newResource){
+        producerService.updateLime(id,newResource);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 

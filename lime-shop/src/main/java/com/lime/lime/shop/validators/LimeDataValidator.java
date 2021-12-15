@@ -23,9 +23,11 @@ public class LimeDataValidator {
     public void validNewLimeData(LimeDTO newLime, UserEntity user, Boolean isUpdate) {
 
         amountValidation(newLime.getAmount());
+        priceValidation(newLime.getPrice());
 
         if(isUpdate){
             ownerValidation(newLime.getId(),user.getId());
+
         }else {
             typeValidation(newLime.getType(), user.getId());
         }
@@ -37,6 +39,7 @@ public class LimeDataValidator {
         amountValidation(amountInOrder);
         checkIfTooMany(lime.getAmount(),amountInOrder);
     }
+
 
     public void ownerValidation(Long limeId, Long userId) {
        List<LimeEntity> limesOfUser = limeRepository.getAllLimeByProducerId(userId);
@@ -60,6 +63,12 @@ public class LimeDataValidator {
     private void amountValidation(long amount) {
         if (amount <= 0) {
             throw new IllegalStateException("The amount should be more then 0");
+        }
+    }
+
+    private void priceValidation(long price){
+        if (price <= 0) {
+            throw new IllegalStateException("The price should be more then 0");
         }
     }
 
