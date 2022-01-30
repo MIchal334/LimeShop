@@ -35,6 +35,7 @@ public class KeycloakService {
         newUser.setEmailVerified(false);
 
         usersResource.create(newUser).close();
+
     }
 
     private static CredentialRepresentation createPasswordCredentials(String password) {

@@ -19,7 +19,7 @@ public class SecurityController {
         this.securityService = securityService;
     }
 
-    @GetMapping
+    @PostMapping
     ResponseEntity<TokenModel> getToken(@RequestBody MultiValueMap<String, String> body)  {
         TokenModel token = securityService.getToken(body);
         return ResponseEntity.ok(token);

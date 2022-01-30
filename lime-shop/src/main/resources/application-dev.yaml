@@ -9,11 +9,13 @@ apiKey:
   geo: "6E-MqWwkVrVCCYnKuzrZI44lovTIyN-YBhm6rwdTqnU"
 
 keycloak:
+  #use-resource-role-mappings: true
   auth-server-url: "http://localhost:8080/auth"
   resource: "Lime-Shop-app"
   realm: "Lime-Shop"
   credentials:
-    secret: "05d473ca-457c-439a-bf8e-0eed540aa3cc"
+    secret: "6CNWgreUpBbKwjsl1papHDhH0UzVVjcl"
   cors: true
   enabled: true
+
 

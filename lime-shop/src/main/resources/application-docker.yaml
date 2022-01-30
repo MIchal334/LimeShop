@@ -11,7 +11,7 @@ keycloak:
   resource: "Lime-Shop-app"
   realm: "Lime-Shop"
   credentials:
-    secret: "05d473ca-457c-439a-bf8e-0eed540aa3cc"
+    secret: "6CNWgreUpBbKwjsl1papHDhH0UzVVjcl"
   cors: true
   enabled: true
 

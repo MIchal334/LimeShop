@@ -55,7 +55,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter impleme
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests()
+        http.cors().and().authorizeRequests()
                 .antMatchers("/auth","/register","/",
                         "/v2/api-docs", "/configuration/ui", "/swagger-resources",
                         "/configuration/security", "/swagger-ui.html", "/webjars/**")
@@ -64,7 +64,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter impleme
                 .fullyAuthenticated();
         http.csrf().disable();
 
-        http.exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+       http.exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
     }
 
     @Bean
