@@ -1,0 +1,65 @@
+version: "3"
+
+
+networks:
+    baza-net:
+
+volumes:
+    dane_bazy:
+    keycloak-data-volume:
+
+
+services:
+
+    keycloak:
+        image: 0100110101001101/keycloakmm
+
+        ports:
+          - 8180:8080
+        networks:
+          - baza-net
+
+        volumes:
+          - keycloak-data-volume:/opt/jboss/keycloak/standalone/data/
+
+        healthcheck:
+          test: "exit 0"
+
+
+    baza:
+        image: mysql
+
+        volumes:
+            - dane_bazy:/var/lib/mysql
+
+        ports:
+            - 3307:3306
+
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_USER: limeU
+            MYSQL_PASSWORD: limeP
+            MYSQL_DATABASE: lime
+
+        networks:
+            - baza-net
+
+        healthcheck:
+          test: "exit 0"
+
+        depends_on:
+          keycloak:
+            condition: service_healthy
+
+    app:
+      image: 0100110101001101/limeapp:latest
+      ports:
+        - 8090:8081
+      networks:
+        - baza-net
+      depends_on:
+        baza:
+          condition: service_healthy
+      environment:
+        apiKeyGeo: "6E-MqWwkVrVCCYnKuzrZI44lovTIyN-YBhm6rwdTqnU"
+        SPRING_PROFILES_ACTIVE: docker
