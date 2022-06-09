@@ -45,7 +45,9 @@ public class AddressService implements AddressServiceInterface {
 
         response = restClient.getForObject(url, ResponseModel.class);
 
-        Items items = Arrays.stream(response.getItems()).findFirst().orElseThrow(() -> new IllegalStateException("Address not found"));
+        Items items = Arrays.stream(response.getItems())
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Address not found"));
 
         return items.getPosition();
     }
