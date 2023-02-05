@@ -1,16 +1,15 @@
 # LimeShop
-Celem projektu było stworzenie backendu do aplikacji webowej służącej do handlu wapnem. W aplikacji występują trzy role użytkowników:
+The main goal of this project was to make backend for web app Limeshop. This app is made for lime trade. The system has three actors:
 
-Client- Może posiadać swoje powiązania ze sprzedawcami wapna. Podglądać statusy swoich zakupów oraz dokonywać nowych.
+Client - has connections with lime dealers, checking informations about it's purcheses and making new ones.
 
-Dealer- Posiada on listę klientów oraz swoje zasoby wapna akceptuje transakcję oraz może je podejrzeć.
+Dealer - has list of clients and resources of lime, can accept a transaction and check other current transactions.
 
-Admin- Może podejrzeć wszystkie transakcje w systemie. Usunąć użytkownika. Konta z tą rolą nie da się stworzyć. Tworzy się ono automatycznie.
+Admin - is able of checking informations about all transactions in the system. Has power to remove users. This kind of account can not be created. It is created automatically. 
 
-
-Technologie:
+Technologies:
 Java, Spring Boot, Flayway, Keycloak, Docker, GIT, MySQL.
 
 
-Uruchomienie: 
-Do uruchomienia aplikacji służy plik 'docker-compose.ymal' który jest dostępny w repozytorium. Aby uruchomić aplikację należy wejść do folderu w którym dany plik się znajduje i następnie z poziomu konsoli uruchomić polecenie "docker-compose up". Po odczekaniu kilku minut wszystko co niezbędne powinno się uruchomić. Po uruchomieniu wszystkiego pod adresem  "localhost:8180" dostępna jest konsola keycloka służąca do zarządzania zarejestrowanymi użytkownikami login: "admin" hasło: "admin". Użyewjąc MySQL Workbench możemy połączyć się i przejrzeć strukturę bazy danych login: "limeU", haslo: "limeP". Samą strukturę endpointów wystawianych przez aplikację można podejrzeć za pomocą adresu "localhost:8090/swagger-ui.html". Na repozytorium dostępna jest również kolekcja endpointów która została wyeksportowana z programu PostMan. Jednym z najważniejszych endpointów który nie jest widoczny w swagger jest endpoint o adresie "http://127.0.0.1:8081/auth" który zwraca Toeken autoryzacyjny. Do uzyskania tokena należy wywołać ten endpoint w typie "x-www-form-urlencoded" oraz z ciałem "username" i "password". Jest to enddpoint tymczasowy dla testów samego backenduC.
+Start of application: 
+In order to run the application, file 'docker-compose.ymal' is necessary. It is located in the repository. Command "docker-compose up" should be run from console in folder, where 'docker-compose.ymal' is located. After a few minutes application should be ready to use. Keycloak console is available at adress "localhost:8180", where useres in the system can be managed (login: "admin" password: "admin"). Useing MySQL Workbench it is possible to connest and have look at data base (login: "limeU", password: "limeP"). Endpoints structure is available at "localhost:8090/swagger-ui.html". The repository contains also file with endpoints exported from PostMan. One of the most imporant endpoints, whitch is not visible in swagger is endpoint at adress "http://127.0.0.1:8081/auth". This endpoint returns authorization token. In order to get the token this endpoint should be execute with type "x-www-form-urlencoded" and with body "username" and "password". This endpoint is temporary, just for beckend testing.  
